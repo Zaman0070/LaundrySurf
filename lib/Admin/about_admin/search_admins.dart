@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:laundry_app/Admin/about_user/user_search_List.dart';
+import 'package:laundry_app/Admin/about_admin/admin_search_List.dart';
 import 'package:laundry_app/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:search_page/search_page.dart';
@@ -32,7 +32,7 @@ class AdminSearchService {
         onQueryUpdate: (s) => print(s),
         items: userList,
         searchLabel: 'Search Users',
-        suggestion: UserSearchList(),
+        suggestion: const AdminSearchList(),
         failure:const  Center(
           child: Text('No Product found :('),
         ),

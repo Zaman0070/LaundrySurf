@@ -31,113 +31,99 @@ class _OptionScreenState extends State<OptionScreen> {
             SizedBox(height: 1.5.h,),
             const Text('Choose the role that best describe you right now.'),
             SizedBox(height: 4.h,),
-            InkWell(
-              onTap: (){
-                setState(() {
-                  index= 0;
-                });
-                Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 0,)));
-              },
-              child: Container(
-                height: 10.h,
-                width: 100.w,
-                decoration: BoxDecoration(
-                  border: Border.all(color:index == 0 ? const Color(0xff27C1F9) :Colors.grey),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 25,
-                        backgroundColor: const Color(0xff27C1F9).withOpacity(0.3),
-                        child: const Icon(Icons.person,color:Color(0xff27C1F9),),
-                      ),
-                      SizedBox(width: 12.w,),
-                      Text('Login as a User',style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w500),),
-                    ],
+        InkWell(
+          onTap: (){
+            setState(() {
+              index= 0;
+            });
+            Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 0,)));
+          },
+          child: Container(
+            height: 10.h,
+            width: 100.w,
+            decoration: BoxDecoration(
+              border: Border.all(color:index == 0 ? const Color(0xff27C1F9) :Colors.grey),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 25,
+                    backgroundColor: const Color(0xff27C1F9).withOpacity(0.3),
+                    child: const Icon(Icons.person,color:Color(0xff27C1F9),),
                   ),
-                ),
+                  SizedBox(width: 12.w,),
+                  Text('Login as a User',style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w500),),
+                ],
               ),
             ),
-            SizedBox(height: 2.h,),
-            InkWell(
-              onTap: (){
-              setState(() {
-                index = 1;
-              });
-              Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 1,)));
-              },
-              child: Container(
-                height: 10.h,
-                width: 100.w,
-                decoration: BoxDecoration(
-                  border: Border.all(color:index == 1 ? const Color(0xff27C1F9) :Colors.grey),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 25,
-                        backgroundColor: const Color(0xff27C1F9).withOpacity(0.3),
-                        child: Image.asset('assets/icons/user.png',height: 3.h,color:const Color(0xff27C1F9),),
-                      ),
-                      SizedBox(width: 12.w,),
-                      Text('Login as a Admin',style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w500),),
-                    ],
+          ),
+        ),
+        SizedBox(height: 2.h,),
+        InkWell(
+          onTap: (){
+            setState(() {
+              index = 1;
+            });
+
+            Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 1,)));
+          },
+          child: Container(
+            height: 10.h,
+            width: 100.w,
+            decoration: BoxDecoration(
+              border: Border.all(color:index == 1 ? const Color(0xff27C1F9) :Colors.grey),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 25,
+                    backgroundColor: const Color(0xff27C1F9).withOpacity(0.3),
+                    child: Image.asset('assets/icons/user.png',height: 3.h,color:const Color(0xff27C1F9),),
                   ),
-                ),
+                  SizedBox(width: 12.w,),
+                  Text('Login as a Admin',style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w500),),
+                ],
               ),
             ),
-            SizedBox(height: 2.h,),
-            FutureBuilder<QuerySnapshot>(
-              future: services.users
-                  .where('type', isEqualTo: 'rider').get(),
-              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return const Text('Some things wrong');
-                }
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                }
-                return InkWell(
-                  onTap: (){
-                    setState(() {
-                      index =  2;
-                    });
-
-                    Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 2,)));
-                  },
-                  child: Container(
-                    height: 10.h,
-                    width: 100.w,
-                    decoration: BoxDecoration(
-                      border: Border.all(color:index == 2 ? const Color(0xff27C1F9) :Colors.grey),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 25,
-                            backgroundColor: const Color(0xff27C1F9).withOpacity(0.3),
-                            child: Image.asset('assets/icons/rider.png',height: 3.h,color:const Color(0xff27C1F9),),
-                          ),
-                          SizedBox(width: 12.w,),
-                          Text('Login as a Rider',style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w500),),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
+          ),
+        ),
+        SizedBox(height: 2.h,),
+        InkWell(
+          onTap: (){
+            setState(() {
+              index =  2;
+            });
+            Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 2,)));
+          },
+          child: Container(
+            height: 10.h,
+            width: 100.w,
+            decoration: BoxDecoration(
+              border: Border.all(color:index == 2 ? const Color(0xff27C1F9) :Colors.grey),
+              borderRadius: BorderRadius.circular(20),
             ),
-
-
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 25,
+                    backgroundColor: const Color(0xff27C1F9).withOpacity(0.3),
+                    child: Image.asset('assets/icons/rider.png',height: 3.h,color:const Color(0xff27C1F9),),
+                  ),
+                  SizedBox(width: 12.w,),
+                  Text('Login as a Rider',style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w500),),
+                ],
+              ),
+            ),
+          ),
+        ),
             SizedBox(height: 30.h,),
           ],
         ),

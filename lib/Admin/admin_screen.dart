@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:laundry_app/Admin/about_admin/admin_List.dart';
+import 'package:laundry_app/Admin/about_rider/rider_List.dart';
 import 'package:laundry_app/Admin/about_user/user_List.dart';
 import 'package:laundry_app/Admin/add_rider.dart';
 import 'package:laundry_app/Admin/add_sub_admin.dart';
@@ -17,9 +18,6 @@ class AdminScreen extends StatefulWidget {
 class _AdminScreenState extends State<AdminScreen> {
 
   FirebaseServices services = FirebaseServices();
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +27,7 @@ class _AdminScreenState extends State<AdminScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
-        title: const Text('Admin DashBoard',style: TextStyle(color: Colors.black),),
+        title:  Text('Admin DashBoard',style: TextStyle(color: Colors.black,fontSize: 18.sp),),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -70,6 +68,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     );
                   },
                 ),
+                SizedBox(height: 2.h,),
                 Divider(),
                 FutureBuilder<QuerySnapshot>(
                   future: services.users
@@ -83,7 +82,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     }
                     return InkWell(
                       onTap: (){
-
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=>const RiderList()));
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -98,6 +97,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     );
                   },
                 ),
+                SizedBox(height: 2.h,),
                 Divider(),
                 FutureBuilder<QuerySnapshot>(
                   future: services.users
@@ -126,6 +126,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     );
                   },
                 ),
+                SizedBox(height: 2.h,),
                 Divider(),
                 SizedBox(height: 1.h,),
 

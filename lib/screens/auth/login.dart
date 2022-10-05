@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     var userProvider = Provider.of<UserProvider>(context);
-    var data = userProvider.riderDetails;
+    var data = userProvider.userData;
 
     Widget _buildLoginBtn() {
       return Container(

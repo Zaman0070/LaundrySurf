@@ -18,7 +18,7 @@ class AdminList extends StatefulWidget {
 }
 
 class _AdminListState extends State<AdminList> {
-  AdminSearchService userSearchService = AdminSearchService();
+  AdminSearchService adminSearchService = AdminSearchService();
   FirebaseServices service = FirebaseServices();
   static List<Admin> users = [];
 
@@ -88,7 +88,7 @@ class _AdminListState extends State<AdminList> {
                   splashColor: const Color(0xff8E7FC0),
                   onTap: () {
                     setState(() {
-                      userSearchService.search(context: context, userList: users,);
+                      adminSearchService.search(context: context, userList: users,);
                     });
                   },
                   child: const TextField(

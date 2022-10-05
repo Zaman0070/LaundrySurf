@@ -13,11 +13,11 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->/Users/apple/StudioProjects/laundry_app/android/app/src/debug/AndroidManifest.xml:7:5-66
-15-->/Users/apple/StudioProjects/laundry_app/android/app/src/debug/AndroidManifest.xml:7:22-64
+15-->/Users/apple/StudioProjects/laundry_app/android/app/src/main/AndroidManifest.xml:4:5-66
+15-->/Users/apple/StudioProjects/laundry_app/android/app/src/main/AndroidManifest.xml:4:22-64
 16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-16-->[com.google.firebase:firebase-auth:21.0.8] /Users/apple/.gradle/caches/transforms-3/f0de3926336374a24a96447f7bf2f015/transformed/jetified-firebase-auth-21.0.8/AndroidManifest.xml:24:5-79
-16-->[com.google.firebase:firebase-auth:21.0.8] /Users/apple/.gradle/caches/transforms-3/f0de3926336374a24a96447f7bf2f015/transformed/jetified-firebase-auth-21.0.8/AndroidManifest.xml:24:22-76
+16-->/Users/apple/StudioProjects/laundry_app/android/app/src/main/AndroidManifest.xml:5:5-79
+16-->/Users/apple/StudioProjects/laundry_app/android/app/src/main/AndroidManifest.xml:5:22-76
 17    <uses-permission android:name="android.permission.WAKE_LOCK" />
 17-->[com.google.android.gms:play-services-measurement-api:21.1.1] /Users/apple/.gradle/caches/transforms-3/b0757fcce028d7c097c062e698c92219/transformed/jetified-play-services-measurement-api-21.1.1/AndroidManifest.xml:24:5-68
 17-->[com.google.android.gms:play-services-measurement-api:21.1.1] /Users/apple/.gradle/caches/transforms-3/b0757fcce028d7c097c062e698c92219/transformed/jetified-play-services-measurement-api-21.1.1/AndroidManifest.xml:24:22-65
