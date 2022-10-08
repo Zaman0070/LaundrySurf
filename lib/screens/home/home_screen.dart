@@ -132,7 +132,7 @@ class _HomeState extends State<Home> {
                      borderRadius: BorderRadius.circular(10),
                    ),
                     child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding:  EdgeInsets.all(0.2.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,7 +188,7 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding:  EdgeInsets.all(0.2.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,7 +244,7 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding:  EdgeInsets.all(0.2.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,

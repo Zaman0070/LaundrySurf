@@ -1,19 +1,128 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:laundry_app/Model/cart_Model.dart';
+import 'package:laundry_app/provider/order_provider.dart';
 import 'package:laundry_app/screens/orderlist/payment.dart';
 import 'package:laundry_app/screens/orderlist/pickup_address.dart';
-import 'package:laundry_app/screens/orderlist/schedule_date.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../provider/cart_provider.dart';
+
 class SchedulePickUp extends StatefulWidget {
-  const SchedulePickUp({Key? key}) : super(key: key);
+  String orderFor;
+
+    SchedulePickUp({Key? key,required this.orderFor}) : super(key: key);
 
   @override
   State<SchedulePickUp> createState() => _SchedulePickUpState();
 }
 
 class _SchedulePickUpState extends State<SchedulePickUp> {
+
+  double? _height;
+  double? _width;
+
+  String? _setTime, _setDate;
+
+  String? _hour, _minute, _time;
+
+  String? dateTime;
+
+  DateTime selectedDate = DateTime.now();
+
+  TimeOfDay selectedTime = const TimeOfDay(hour: 00, minute: 00);
+
+  final TextEditingController _pickDateController = TextEditingController();
+  final TextEditingController _deliverDateController = TextEditingController();
+  final TextEditingController _pickTimeController = TextEditingController();
+  final TextEditingController _deliverTimeController = TextEditingController();
+
+  Future<void> _pSelectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        initialDatePickerMode: DatePickerMode.day,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2101));
+    if (picked != null) {
+      setState(() {
+        selectedDate = picked;
+        _pickDateController.text = DateFormat.yMd().format(selectedDate);
+      });
+    }
+  }
+  Future<void> _dSelectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        initialDatePickerMode: DatePickerMode.day,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2101));
+    if (picked != null) {
+      setState(() {
+        selectedDate = picked;
+        _deliverDateController.text = DateFormat.yMd().format(selectedDate);
+      });
+    }
+  }
+  Future<void> _pSelectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (picked != null) {
+      setState(() {
+        selectedTime = picked;
+        _hour = selectedTime.hour.toString();
+        _minute = selectedTime.minute.toString();
+        _time = '${_hour!} : ${_minute!}';
+        _pickTimeController.text = _time!;
+        _pickTimeController.text = formatDate(
+            DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
+            [hh, ':', nn, " ", am]).toString();
+      });
+    }
+  }
+  Future<void> _dSelectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (picked != null) {
+      setState(() {
+        selectedTime = picked;
+        _hour = selectedTime.hour.toString();
+        _minute = selectedTime.minute.toString();
+        _time = '${_hour!} : ${_minute!}';
+        _deliverTimeController.text = _time!;
+        _deliverTimeController.text = formatDate(
+            DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
+            [hh, ':', nn, " ", am]).toString();
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    _pickDateController.text = DateFormat.yMd().format(DateTime.now());
+    _deliverDateController.text = DateFormat.yMd().format(DateTime.now());
+
+    _pickTimeController.text = formatDate(
+        DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
+        [hh, ':', nn, " ", am]).toString();
+    _deliverTimeController.text = formatDate(
+        DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
+        [hh, ':', nn, " ", am]).toString();
+    super.initState();
+  }
+
+
+
   int itemCount = 0;
   int index = 0;
 
@@ -305,6 +414,9 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
   }
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+    OrderProvider orderProvider = Provider.of<OrderProvider>(context);
+    cartProvider.getReviewCartDta();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -321,7 +433,7 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
         ),
       ),
         bottomNavigationBar: Container(
-          height: 15.h,
+          height: 18.h,
           decoration:  BoxDecoration(
               color: Colors.white,
               borderRadius: const BorderRadius.only(
@@ -351,7 +463,7 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Total',style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w300),),
-                            Text('${itemCount} items',style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.bold),),
+                            Text('${cartProvider.getTotalItem()} items',style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.bold),),
 
                           ],
                         ),
@@ -360,14 +472,14 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
                     Column(
                       children: [
                         Text('Cost',style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w300),),
-                        Text('\$${259}',style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.bold,color: const Color(0xff27C1F9)),),
+                        Text('${cartProvider.getTotalPrice()}',style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.bold,color: const Color(0xff27C1F9)),),
                       ],
                     ),
                   ],
                 ),
                 SizedBox(height: 1.h,),
                 InkWell(
-                  onTap: () {
+                  onTap: ()async {
                     if (index == 0) {
                       showFlexibleBottomSheet(
                         decoration: BoxDecoration(
@@ -393,14 +505,23 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
                         isExpand: false,
                       );
                     }else if(index == 2){
-                      showFlexibleBottomSheet(
-                        minHeight: 0,
-                        initHeight: 0.8,
-                        maxHeight: 0.8,
-                        context: context,
-                        builder: visa,
-                        isExpand: false,
-                      );
+                      QuerySnapshot reviewCartValue= await FirebaseFirestore.instance.collection('Cart').where('cartQuantity',isGreaterThan: 0).get();
+                      reviewCartValue.docs.forEach((element){
+                        orderProvider.addOrderData(
+                          orderId: element.get('cartId'),
+                          orderName: element.get('cartName'),
+                          orderQuantity: cartProvider.getTotalItem(),
+                          orderUrl: '',
+                          orderPrice:  cartProvider.getOrderPrice(),
+                          pickTime: _pickTimeController.text,
+                          pickupDate: _pickDateController.text,
+                          deliverTime: _deliverTimeController.text,
+                          deliverDate: _deliverDateController.text,
+                          orderFor: widget.orderFor,
+
+
+                        );
+                      });
                     }
                   },
                   child: Container(
@@ -425,7 +546,7 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
             Text('Price Details',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 16.sp),),
             SizedBox(height: 2.h,),
             Container(
-              height: 13.5.h,
+              height: 17.2.h,
               width: 100.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -439,7 +560,7 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Subtotal',style: TextStyle(fontSize: 12.sp),),
-                        Text('\$220.00',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 14.sp),),
+                        Text('\$ ${cartProvider.getTotalPrice()}',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 14.sp),),
                       ],
                     ),
                     SizedBox(height: 0.5.h,),
@@ -447,7 +568,7 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Tax',style: TextStyle(fontSize: 12.sp),),
-                        Text('\$10.0',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 14.sp),),
+                        Text('\$0.0',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 14.sp),),
                       ],
                     ),
                     SizedBox(height: 0.5.h,),
@@ -456,14 +577,181 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Total',style: TextStyle(fontSize: 12.sp),),
-                        Text('\$230.00',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 14.sp),),
+                        Text('\$ ${cartProvider.getTotalPrice()}',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 14.sp),),
                       ],
                     ),
                   ],
                 ),
               ),
             ),
-            const ScheduleDate(),
+             Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 2.h,),
+            Text("Schedule Date & Time",style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 16.sp),),
+            Row(
+              children: <Widget>[
+                InkWell(
+                  onTap: () {
+                    _pSelectDate(context);
+                  },
+                  child: Container(
+                    width: 20.h,
+                    height: 5.h,
+                    margin: const EdgeInsets.only(top: 30),
+                    alignment: Alignment.center,
+                    child: TextFormField(
+                      style: const TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                      enabled: false,
+                      keyboardType: TextInputType.text,
+                      controller: _pickDateController,
+                      onSaved: (val) {
+                        _setDate = val;
+                      },
+                      decoration:  InputDecoration(
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset('assets/icons/pick.png',height: 2.h,),
+                          ),
+                          labelText: 'Pickup Date',
+                          labelStyle: const TextStyle(color: Colors.black),
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
+                          ),
+                          // disabledBorder:
+                          // UnderlineInputBorder(borderSide: BorderSide.none),
+                          // labelText: 'Time',
+                          contentPadding: const EdgeInsets.only(top: 0.0)),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    _pSelectTime(context);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 30),
+                    width: 20.h,
+                    height: 5.h,
+                    alignment: Alignment.center,
+                    child: TextFormField(
+                      style: const TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                      onSaved: (val) {
+                        _setTime = val;
+                      },
+                      enabled: false,
+                      keyboardType: TextInputType.text,
+                      controller: _pickTimeController,
+                      decoration:  InputDecoration(
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset('assets/icons/pick.png',height: 2.h,),
+                          ),
+                          labelText: 'Pickup Time',
+                          labelStyle: const TextStyle(color: Colors.black),
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
+                          // labelText: 'Time',
+                          contentPadding: const EdgeInsets.all(5)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                InkWell(
+                  onTap: () {
+                    _dSelectDate(context);
+                  },
+                  child: Container(
+                    width: 20.h,
+                    height: 5.h,
+                    margin: const EdgeInsets.only(top: 30),
+                    alignment: Alignment.center,
+                    child: TextFormField(
+                      style: const TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                      enabled: false,
+                      keyboardType: TextInputType.text,
+                      controller: _deliverDateController,
+                      onSaved: (val) {
+                        _setDate = val;
+                      },
+                      decoration:  InputDecoration(
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset('assets/icons/deliver.png',height: 2.h,),
+                          ),
+                          labelText: 'Deliver Date',
+                          labelStyle: const TextStyle(color: Colors.black),
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
+                          ),
+                          // disabledBorder:
+                          // UnderlineInputBorder(borderSide: BorderSide.none),
+                          // labelText: 'Time',
+                          contentPadding: const EdgeInsets.only(top: 0.0)),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    _dSelectTime(context);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 30),
+                    width: 20.h,
+                    height: 5.h,
+                    alignment: Alignment.center,
+                    child: TextFormField(
+                      style: const TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                      onSaved: (val) {
+                        _setTime = val;
+                      },
+                      enabled: false,
+                      keyboardType: TextInputType.text,
+                      controller: _deliverTimeController,
+                      decoration:  InputDecoration(
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset('assets/icons/deliver.png',height: 2.h,),
+                          ),
+                          labelText: 'Deliver Time',
+                          labelStyle: const TextStyle(color: Colors.black),
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
+                          // labelText: 'Time',
+                          contentPadding: const EdgeInsets.all(5)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+
+
+
+
+          ],
+        ),
              Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -471,7 +759,7 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
               Text("Payment Methode",style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 16.sp),),
               SizedBox(height: 1.h,),
               Container(
-                height: 19.h,
+                height: 21.5.h,
                 width: 100.w,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -481,13 +769,13 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
                 child: Column(
                   children: [
                     InkWell(
-                      onTap: (){
+                      onTap: () async {
                         setState(() {
                           index= 0;
                         });
                       },
                       child: Container(
-                        height: 6.h,
+                        height: 7.h,
                         width: 100.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
@@ -527,9 +815,10 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
                         setState(() {
                           index= 1;
                         });
+
                       },
                       child: Container(
-                        height: 6.h,
+                        height: 7.h,
                         width: 100.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
@@ -571,7 +860,7 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
                         });
                       },
                       child: Container(
-                        height: 6.h,
+                        height: 7.h,
                         width: 100.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
@@ -601,7 +890,7 @@ class _SchedulePickUpState extends State<SchedulePickUp> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
             const PickUpAddress(),

@@ -54,6 +54,7 @@ dependencies:
   google_sign_in: ^5.4.2
   sign_in_button: ^3.0.0
   search_page: ^2.0.0+1
+  location:
 
 dev_dependencies:
   flutter_test:

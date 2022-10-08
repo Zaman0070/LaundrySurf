@@ -11,6 +11,8 @@ MERGED from [:firebase_core] /Users/apple/StudioProjects/laundry_app/build/fireb
 MERGED from [:firebase_core] /Users/apple/StudioProjects/laundry_app/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
 MERGED from [:image_picker_android] /Users/apple/StudioProjects/laundry_app/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-19:19
 MERGED from [:image_picker_android] /Users/apple/StudioProjects/laundry_app/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-19:19
+MERGED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:12:5-18:19
+MERGED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:12:5-18:19
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/apple/.gradle/caches/transforms-3/f2776645d1376969f9df15181cefad05/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/apple/.gradle/caches/transforms-3/f2776645d1376969f9df15181cefad05/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
 MERGED from [com.google.firebase:firebase-analytics:21.1.1] /Users/apple/.gradle/caches/transforms-3/7b378f353d1a01b277d48fe149f536b4/transformed/jetified-firebase-analytics-21.1.1/AndroidManifest.xml:7:5-20
@@ -35,6 +37,8 @@ MERGED from [com.google.android.gms:play-services-maps:18.0.2] /Users/apple/.gra
 MERGED from [com.google.android.gms:play-services-maps:18.0.2] /Users/apple/.gradle/caches/transforms-3/1cd74712603f78dbd795af0346d60ea3/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:36:5-42:19
 MERGED from [com.google.android.gms:play-services-auth:20.0.1] /Users/apple/.gradle/caches/transforms-3/82af46c8a3704f8bc57942890a326145/transformed/jetified-play-services-auth-20.0.1/AndroidManifest.xml:22:5-38:19
 MERGED from [com.google.android.gms:play-services-auth:20.0.1] /Users/apple/.gradle/caches/transforms-3/82af46c8a3704f8bc57942890a326145/transformed/jetified-play-services-auth-20.0.1/AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /Users/apple/.gradle/caches/transforms-3/9e662c388e0ea8a3a6c8ef2cc80f4337/transformed/jetified-play-services-location-16.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /Users/apple/.gradle/caches/transforms-3/9e662c388e0ea8a3a6c8ef2cc80f4337/transformed/jetified-play-services-location-16.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-measurement:21.1.1] /Users/apple/.gradle/caches/transforms-3/005bca9a5019ba8282f889847e4ecfca/transformed/jetified-play-services-measurement-21.1.1/AndroidManifest.xml:28:5-44:19
 MERGED from [com.google.android.gms:play-services-measurement:21.1.1] /Users/apple/.gradle/caches/transforms-3/005bca9a5019ba8282f889847e4ecfca/transformed/jetified-play-services-measurement-21.1.1/AndroidManifest.xml:28:5-44:19
 MERGED from [com.google.android.gms:play-services-measurement-sdk:21.1.1] /Users/apple/.gradle/caches/transforms-3/7ab4e31d87916c8d5155fca130d7254f/transformed/jetified-play-services-measurement-sdk-21.1.1/AndroidManifest.xml:22:5-23:19
@@ -45,6 +49,8 @@ MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/apple/.gra
 MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/apple/.gradle/caches/transforms-3/c2e9ad515cc5f3941095b2e3efe1242d/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:19:5-23:19
 MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/apple/.gradle/caches/transforms-3/d8f21c2ab9869f6cf247d6d6222f4b55/transformed/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/apple/.gradle/caches/transforms-3/d8f21c2ab9869f6cf247d6d6222f4b55/transformed/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /Users/apple/.gradle/caches/transforms-3/cda48aa4c5b45e53b648e92eaecabfeb/transformed/jetified-play-services-places-placereport-16.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /Users/apple/.gradle/caches/transforms-3/cda48aa4c5b45e53b648e92eaecabfeb/transformed/jetified-play-services-places-placereport-16.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-measurement-impl:21.1.1] /Users/apple/.gradle/caches/transforms-3/5d2639f4758cf96061669956455723fa/transformed/jetified-play-services-measurement-impl-21.1.1/AndroidManifest.xml:29:5-30:19
 MERGED from [com.google.android.gms:play-services-measurement-impl:21.1.1] /Users/apple/.gradle/caches/transforms-3/5d2639f4758cf96061669956455723fa/transformed/jetified-play-services-measurement-impl-21.1.1/AndroidManifest.xml:29:5-30:19
 MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /Users/apple/.gradle/caches/transforms-3/c2a7c8f686064bc6524a9cedd001f790/transformed/jetified-play-services-ads-identifier-18.0.0/AndroidManifest.xml:25:5-20
@@ -78,6 +84,7 @@ MERGED from [:firebase_core] /Users/apple/StudioProjects/laundry_app/build/fireb
 MERGED from [:google_maps_flutter_android] /Users/apple/StudioProjects/laundry_app/build/google_maps_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:image_picker_android] /Users/apple/StudioProjects/laundry_app/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-21:12
 MERGED from [:flutter_plugin_android_lifecycle] /Users/apple/StudioProjects/laundry_app/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-20:12
 MERGED from [:google_sign_in_android] /Users/apple/StudioProjects/laundry_app/build/google_sign_in_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/apple/.gradle/caches/transforms-3/0fbff5502764710f53ba7c811cca9d9e/transformed/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/apple/.gradle/caches/transforms-3/57c6b9b5a322057a0f5a74d970378c4e/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
@@ -91,8 +98,10 @@ MERGED from [com.google.firebase:firebase-auth-interop:20.0.0] /Users/apple/.gra
 MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.2] /Users/apple/.gradle/caches/transforms-3/f3e9f462c463d025cc52053bb3d0659e/transformed/jetified-firebase-appcheck-interop-16.0.2/AndroidManifest.xml:15:1-26:12
 MERGED from [com.google.firebase:firebase-installations:17.0.3] /Users/apple/.gradle/caches/transforms-3/02999d46782b42bc0c085985cdf67779/transformed/jetified-firebase-installations-17.0.3/AndroidManifest.xml:2:1-24:12
 MERGED from [com.google.firebase:firebase-common:20.1.2] /Users/apple/.gradle/caches/transforms-3/c93718110b65a93c4e01086e8151c310/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:15:1-40:12
+MERGED from [androidx.core:core-ktx:1.3.2] /Users/apple/.gradle/caches/transforms-3/eb1b71035be4e0a4c61b45a0168492f1/transformed/jetified-core-ktx-1.3.2/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-maps:18.0.2] /Users/apple/.gradle/caches/transforms-3/1cd74712603f78dbd795af0346d60ea3/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:17:1-44:12
 MERGED from [com.google.android.gms:play-services-auth:20.0.1] /Users/apple/.gradle/caches/transforms-3/82af46c8a3704f8bc57942890a326145/transformed/jetified-play-services-auth-20.0.1/AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /Users/apple/.gradle/caches/transforms-3/9e662c388e0ea8a3a6c8ef2cc80f4337/transformed/jetified-play-services-location-16.0.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-measurement:21.1.1] /Users/apple/.gradle/caches/transforms-3/005bca9a5019ba8282f889847e4ecfca/transformed/jetified-play-services-measurement-21.1.1/AndroidManifest.xml:17:1-46:12
 MERGED from [com.google.android.gms:play-services-measurement-sdk:21.1.1] /Users/apple/.gradle/caches/transforms-3/7ab4e31d87916c8d5155fca130d7254f/transformed/jetified-play-services-measurement-sdk-21.1.1/AndroidManifest.xml:17:1-25:12
 MERGED from [com.google.android.gms:play-services-safetynet:17.0.0] /Users/apple/.gradle/caches/transforms-3/4a158101a2e26c8bca972f2424ead3d5/transformed/jetified-play-services-safetynet-17.0.0/AndroidManifest.xml:17:1-24:12
@@ -102,6 +111,7 @@ MERGED from [com.google.firebase:firebase-database-collection:18.0.1] /Users/app
 MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/apple/.gradle/caches/transforms-3/c2e9ad515cc5f3941095b2e3efe1242d/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:16:1-24:12
 MERGED from [com.google.firebase:firebase-installations-interop:17.0.2] /Users/apple/.gradle/caches/transforms-3/744b9b4c66b9c7571978b29747228b26/transformed/jetified-firebase-installations-interop-17.0.2/AndroidManifest.xml:15:1-23:12
 MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/apple/.gradle/caches/transforms-3/d8f21c2ab9869f6cf247d6d6222f4b55/transformed/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /Users/apple/.gradle/caches/transforms-3/cda48aa4c5b45e53b648e92eaecabfeb/transformed/jetified-play-services-places-placereport-16.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-measurement-impl:21.1.1] /Users/apple/.gradle/caches/transforms-3/5d2639f4758cf96061669956455723fa/transformed/jetified-play-services-measurement-impl-21.1.1/AndroidManifest.xml:17:1-32:12
 MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /Users/apple/.gradle/caches/transforms-3/c2a7c8f686064bc6524a9cedd001f790/transformed/jetified-play-services-ads-identifier-18.0.0/AndroidManifest.xml:17:1-27:12
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:21.1.1] /Users/apple/.gradle/caches/transforms-3/b58066fe15ada94305e8d2eb77bf85ef/transformed/jetified-play-services-measurement-sdk-api-21.1.1/AndroidManifest.xml:17:1-28:12
@@ -219,6 +229,8 @@ MERGED from [:image_picker_android] /Users/apple/StudioProjects/laundry_app/buil
 MERGED from [:image_picker_android] /Users/apple/StudioProjects/laundry_app/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_plugin_android_lifecycle] /Users/apple/StudioProjects/laundry_app/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_plugin_android_lifecycle] /Users/apple/StudioProjects/laundry_app/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:google_sign_in_android] /Users/apple/StudioProjects/laundry_app/build/google_sign_in_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:google_sign_in_android] /Users/apple/StudioProjects/laundry_app/build/google_sign_in_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/apple/.gradle/caches/transforms-3/0fbff5502764710f53ba7c811cca9d9e/transformed/multidex-2.0.0/AndroidManifest.xml:20:5-43
@@ -245,10 +257,14 @@ MERGED from [com.google.firebase:firebase-installations:17.0.3] /Users/apple/.gr
 MERGED from [com.google.firebase:firebase-installations:17.0.3] /Users/apple/.gradle/caches/transforms-3/02999d46782b42bc0c085985cdf67779/transformed/jetified-firebase-installations-17.0.3/AndroidManifest.xml:6:5-8:41
 MERGED from [com.google.firebase:firebase-common:20.1.2] /Users/apple/.gradle/caches/transforms-3/c93718110b65a93c4e01086e8151c310/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.firebase:firebase-common:20.1.2] /Users/apple/.gradle/caches/transforms-3/c93718110b65a93c4e01086e8151c310/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-ktx:1.3.2] /Users/apple/.gradle/caches/transforms-3/eb1b71035be4e0a4c61b45a0168492f1/transformed/jetified-core-ktx-1.3.2/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.core:core-ktx:1.3.2] /Users/apple/.gradle/caches/transforms-3/eb1b71035be4e0a4c61b45a0168492f1/transformed/jetified-core-ktx-1.3.2/AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.gms:play-services-maps:18.0.2] /Users/apple/.gradle/caches/transforms-3/1cd74712603f78dbd795af0346d60ea3/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-maps:18.0.2] /Users/apple/.gradle/caches/transforms-3/1cd74712603f78dbd795af0346d60ea3/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth:20.0.1] /Users/apple/.gradle/caches/transforms-3/82af46c8a3704f8bc57942890a326145/transformed/jetified-play-services-auth-20.0.1/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth:20.0.1] /Users/apple/.gradle/caches/transforms-3/82af46c8a3704f8bc57942890a326145/transformed/jetified-play-services-auth-20.0.1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /Users/apple/.gradle/caches/transforms-3/9e662c388e0ea8a3a6c8ef2cc80f4337/transformed/jetified-play-services-location-16.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /Users/apple/.gradle/caches/transforms-3/9e662c388e0ea8a3a6c8ef2cc80f4337/transformed/jetified-play-services-location-16.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-measurement:21.1.1] /Users/apple/.gradle/caches/transforms-3/005bca9a5019ba8282f889847e4ecfca/transformed/jetified-play-services-measurement-21.1.1/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-measurement:21.1.1] /Users/apple/.gradle/caches/transforms-3/005bca9a5019ba8282f889847e4ecfca/transformed/jetified-play-services-measurement-21.1.1/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-measurement-sdk:21.1.1] /Users/apple/.gradle/caches/transforms-3/7ab4e31d87916c8d5155fca130d7254f/transformed/jetified-play-services-measurement-sdk-21.1.1/AndroidManifest.xml:20:5-44
@@ -267,6 +283,8 @@ MERGED from [com.google.firebase:firebase-installations-interop:17.0.2] /Users/a
 MERGED from [com.google.firebase:firebase-installations-interop:17.0.2] /Users/apple/.gradle/caches/transforms-3/744b9b4c66b9c7571978b29747228b26/transformed/jetified-firebase-installations-interop-17.0.2/AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/apple/.gradle/caches/transforms-3/d8f21c2ab9869f6cf247d6d6222f4b55/transformed/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:4:5-43
 MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/apple/.gradle/caches/transforms-3/d8f21c2ab9869f6cf247d6d6222f4b55/transformed/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /Users/apple/.gradle/caches/transforms-3/cda48aa4c5b45e53b648e92eaecabfeb/transformed/jetified-play-services-places-placereport-16.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /Users/apple/.gradle/caches/transforms-3/cda48aa4c5b45e53b648e92eaecabfeb/transformed/jetified-play-services-places-placereport-16.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-measurement-impl:21.1.1] /Users/apple/.gradle/caches/transforms-3/5d2639f4758cf96061669956455723fa/transformed/jetified-play-services-measurement-impl-21.1.1/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-measurement-impl:21.1.1] /Users/apple/.gradle/caches/transforms-3/5d2639f4758cf96061669956455723fa/transformed/jetified-play-services-measurement-impl-21.1.1/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /Users/apple/.gradle/caches/transforms-3/c2a7c8f686064bc6524a9cedd001f790/transformed/jetified-play-services-ads-identifier-18.0.0/AndroidManifest.xml:20:5-44
@@ -407,6 +425,24 @@ ADDED from [:image_picker_android] /Users/apple/StudioProjects/laundry_app/build
 		ADDED from [:image_picker_android] /Users/apple/StudioProjects/laundry_app/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
 	android:name
 		ADDED from [:image_picker_android] /Users/apple/StudioProjects/laundry_app/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-81
+	android:name
+		ADDED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-79
+	android:name
+		ADDED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:10:22-76
+service#com.lyokone.location.FlutterLocationService
+ADDED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:13:9-17:56
+	android:enabled
+		ADDED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-35
+	android:exported
+		ADDED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-37
+	android:foregroundServiceType
+		ADDED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-53
+	android:name
+		ADDED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-71
 uses-library#androidx.window.extensions
 ADDED from [androidx.window:window:1.0.0-beta04] /Users/apple/.gradle/caches/transforms-3/f2776645d1376969f9df15181cefad05/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
 	android:required

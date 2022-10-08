@@ -21,7 +21,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       body: SafeArea(child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Column(
+        child: ListView(
           children: [
             Center(child: Text('Setting',style: TextStyle(fontSize: 15.sp),)),
             SizedBox(height: 1.h,),
@@ -104,7 +104,7 @@ class _ProfileState extends State<Profile> {
             ),
             SizedBox(height: 2.h,),
             Container(
-              height: 15.5.h,
+              height: 15.6.h,
               width: 100.w,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey.shade300),
@@ -169,7 +169,7 @@ class _ProfileState extends State<Profile> {
             ),
             SizedBox(height: 2.h,),
             Container(
-              height: 22.2.h,
+              height: 22.3.h,
               width: 100.w,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey.shade300),

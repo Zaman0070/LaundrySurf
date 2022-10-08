@@ -131,7 +131,7 @@ class _DryState extends State<Dry> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        height: 15.h,
+        height: 18.h,
         decoration:  BoxDecoration(
             color: Colors.white,
             borderRadius: const BorderRadius.only(
@@ -178,7 +178,7 @@ class _DryState extends State<Dry> {
               SizedBox(height: 1.h,),
               InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>const SchedulePickUp()));
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=> SchedulePickUp(orderFor: 'Dry',)));
                 },
                 child: Container(
                   height: 5.h,

@@ -5,6 +5,9 @@ import 'package:sizer/sizer.dart';
 
 import '../screens/orderlist/pickup_address.dart';
 
+
+
+
 class OrderScreen extends StatefulWidget {
   const OrderScreen({Key? key}) : super(key: key);
 
@@ -126,7 +129,7 @@ class _OrderScreenState extends State<OrderScreen> {
             Center(child: Text('Your pickup has been confirmed',style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w400,color: Colors.grey.shade500),)),
             SizedBox(height: 2.h,),
             Container(
-              height: 45.h,
+              height: 51.h,
               width: 100.w,
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey.shade300),
@@ -239,7 +242,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(2.0),
                 child: Column(
                   children: [
                     Row(
@@ -277,7 +280,7 @@ class _OrderScreenState extends State<OrderScreen> {
             ),
             SizedBox(height: 1.h,),
             Container(
-              height: 10.h,
+              height: 10.5.h,
               width: 100.w,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey.shade300),

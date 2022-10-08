@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:laundry_app/order/order.dart';
 import 'package:laundry_app/screens/orderlist/order_list.dart';
 import 'package:laundry_app/search/search_screen.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../order/order.dart';
 import '../profile/profile_screen.dart';
 import 'home_screen.dart';
 
