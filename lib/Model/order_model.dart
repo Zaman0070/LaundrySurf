@@ -9,6 +9,8 @@ class OrderModel {
   String? deliverDate;
   String? deliverTime;
   String? orderFor;
+  String? payment;
+  String? orderStatus;
 
 
   OrderModel(
@@ -21,6 +23,8 @@ class OrderModel {
       this.pickTime,
       this.deliverDate,
       this.deliverTime,
-        this.orderFor
+        this.orderFor,
+        this.payment,
+        this.orderStatus
       });
 }

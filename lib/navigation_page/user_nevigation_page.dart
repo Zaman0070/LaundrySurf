@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:laundry_app/Admin/admin_screen.dart';
 import 'package:laundry_app/screens/auth/login.dart';
-import 'package:laundry_app/screens/rider/rider_screen.dart';
 import 'package:laundry_app/screens/splash/onboardScreen.dart';
 import 'package:laundry_app/services/firbaseservice.dart';
 
 
+import '../rider/rider_screen.dart';
 import '../screens/home/main_screen.dart';
 
 class UserNavigationPage extends StatefulWidget {

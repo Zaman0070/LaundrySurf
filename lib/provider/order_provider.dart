@@ -1,34 +1,62 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:laundry_app/Model/order_model.dart';
+import 'package:laundry_app/services/firbaseservice.dart';
 import 'package:location/location.dart';
 
 import '../Model/cart_Model.dart';
 
 
 class OrderProvider with ChangeNotifier {
+  FirebaseServices services = FirebaseServices();
+  DocumentSnapshot? orderData;
+  QuerySnapshot ? ordersData;
+
+  getOrderDetails(details) {
+    orderData = details;
+    notifyListeners();
+  }
+  getAllOrderDetails(details) {
+    ordersData = details;
+    notifyListeners();
+  }
+
+  List<String> urlList = [];
+  getImage( url) {
+    urlList.add(url);
+    notifyListeners();
+  }
+
+  CollectionReference order = FirebaseFirestore.instance.collection('Order');
+  int random1 = Random().nextInt(99999) ;
+
+
   LocationData? setLocation;
   void addOrderData({
     String? orderId,
     String? orderName,
-    String? orderUrl,
-    int? orderPrice,
-    int? orderQuantity,
+    List<String>? orderUrl,
+    String? orderQuantity,
     String? pickupDate,
     String? pickTime,
     String? deliverDate,
     String? deliverTime,
     String? orderFor,
+    String? orderStatus,
+    String? orderPlacerId,
+    int? orderTime,
+    int? price,
+    String? description,
 
   }) async {
-    await FirebaseFirestore.instance
-        .collection('Order').doc(orderId)
+
+    await services.order.doc(orderId)
         .set({
-      'orderId': orderId,
+      'orderId': order.doc(orderId),
       'orderName': orderName,
       'orderUrl': orderUrl,
-      'orderPrice': orderPrice,
       'orderQuantity': orderQuantity,
       'pickupDate':pickupDate,
       'pickTime':pickTime,
@@ -36,7 +64,52 @@ class OrderProvider with ChangeNotifier {
       'deliverTime':deliverTime,
       'orderFor':orderFor,
       'latitude':setLocation!.latitude,
-      'longitude':setLocation!.longitude
+      'longitude':setLocation!.longitude,
+      'orderStatus':orderStatus,
+      'orderPlacerId':orderPlacerId,
+      'orderTime':orderTime,
+      'price':'',
+      'riderAssign':'',
+      'orderNumber':random1.toString(),
+      "description":description,
+    });
+  }
+
+  void updateOrderData({
+    String? orderId,
+    String? orderName,
+    List<dynamic>? orderUrl,
+    String? orderQuantity,
+    String? pickupDate,
+    String? pickTime,
+    String? deliverDate,
+    String? deliverTime,
+    String? orderFor,
+    String? orderStatus,
+    String? orderPlacerId,
+    int? orderTime,
+    String? price,
+
+  }) async {
+    await FirebaseFirestore.instance
+        .collection('Order').doc(orderId)
+        .update({
+      'orderId': order.doc(orderId),
+      'orderName': orderName,
+      'orderUrl': orderUrl,
+      'orderQuantity': orderQuantity,
+      'pickupDate':pickupDate,
+      'pickTime':pickTime,
+      'deliverDate':deliverDate,
+      'deliverTime':deliverTime,
+      'orderFor':orderFor,
+      'latitude':setLocation!.latitude,
+      'longitude':setLocation!.longitude,
+      'orderStatus':orderStatus,
+      'orderPlacerId':orderPlacerId,
+      'orderTime':orderTime,
+      'price':'',
+      'riderAssign':'',
     });
   }
 
@@ -51,16 +124,17 @@ class OrderProvider with ChangeNotifier {
     QuerySnapshot reviewCartValue= await FirebaseFirestore.instance.collection('Order').get();
     for (var element in reviewCartValue.docs) {
       OrderModel orderModel = OrderModel(
-        orderId: element.get('cartId'),
-        orderName: element.get('cartName'),
-        orderUrl: element.get('cartUrl'),
-        orderQuantity: element.get('cartQuantity'),
-        orderPrice: element.get('cartPrice'),
+        orderId: element.get('orderId'),
+        orderName: element.get('orderName'),
+        orderUrl: element.get('orderUrl'),
+        orderQuantity: element.get('orderQuantity'),
+        orderPrice: element.get('price'),
         pickupDate:  element.get('pickupDate'),
           pickTime:  element.get('pickTime'),
       deliverDate:  element.get('deliverDate'),
       deliverTime:  element.get('deliverTime'),
         orderFor: element.get('orderFor'),
+        orderStatus: element.get('orderStatus')
       );
       newList.add(orderModel);
     }
@@ -74,20 +148,6 @@ class OrderProvider with ChangeNotifier {
 //////////// Total Price//////////////////////
 
 
-  // getTotalPrice(){
-  //   double total =0.0;
-  //   orderDataList.forEach((element) {
-  //     total += element.cartPrice! * element.cartQuantity!;
-  //   });
-  //   return total;
-  // }
-  // getTotalItem(){
-  //   int total =0;
-  //   reviewCartDataList.forEach((element) {
-  //     total += element.cartQuantity!;
-  //   });
-  //   return total;
-  // }
 
   //////////////////// \review cart del ///////////////////
 
@@ -95,4 +155,8 @@ class OrderProvider with ChangeNotifier {
     FirebaseFirestore.instance.collection('Order').doc(orderId).delete();
     notifyListeners();
   }
+
+
+
+
 }

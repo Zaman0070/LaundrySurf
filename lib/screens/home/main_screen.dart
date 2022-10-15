@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:laundry_app/screens/orderlist/order_list.dart';
+import 'package:laundry_app/screens/orderlist/order_form.dart';
 import 'package:laundry_app/search/search_screen.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../order/order.dart';
+import '../order/order.dart';
 import '../profile/profile_screen.dart';
 import 'home_screen.dart';
 
@@ -52,7 +52,7 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: const Color(0xff27C1F9),
         child: const Icon(CupertinoIcons.add),
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (_)=>const  OrderList()));
+          Navigator.push(context, MaterialPageRoute(builder: (_)=>const  OrderForm()));
         },),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
       bottomNavigationBar: BottomAppBar(

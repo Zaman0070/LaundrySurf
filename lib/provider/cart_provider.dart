@@ -6,6 +6,8 @@ import '../Model/cart_Model.dart';
 
 
 class CartProvider with ChangeNotifier {
+
+
   void addCartData({
     String? cartId,
     String? cartName,

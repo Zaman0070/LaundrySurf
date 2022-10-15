@@ -15,12 +15,14 @@ androidx/annotation/ColorInt.class
 androidx/annotation/ColorLong.class
 androidx/annotation/ColorRes.class
 androidx/annotation/ContentView.class
+androidx/annotation/DeprecatedSinceApi.class
 androidx/annotation/DimenRes.class
 androidx/annotation/Dimension.class
 androidx/annotation/Discouraged.class
 androidx/annotation/DisplayContext.class
 androidx/annotation/DoNotInline.class
 androidx/annotation/DrawableRes.class
+androidx/annotation/EmptySuper.class
 androidx/annotation/FloatRange.class
 androidx/annotation/FontRes.class
 androidx/annotation/FractionRes.class
@@ -45,6 +47,7 @@ androidx/annotation/NavigationRes.class
 androidx/annotation/NonNull.class
 androidx/annotation/NonUiContext.class
 androidx/annotation/Nullable.class
+androidx/annotation/OpenForTesting.class
 androidx/annotation/OptIn.class
 androidx/annotation/PluralsRes.class
 androidx/annotation/Px.class
@@ -58,6 +61,7 @@ androidx/annotation/RequiresPermission$Write.class
 androidx/annotation/RequiresPermission.class
 androidx/annotation/RestrictTo$Scope.class
 androidx/annotation/RestrictTo.class
+androidx/annotation/ReturnThis.class
 androidx/annotation/Size.class
 androidx/annotation/StringDef.class
 androidx/annotation/StringRes.class
@@ -347,6 +351,7 @@ javax/annotation/meta/TypeQualifierNickname.class
 javax/annotation/meta/TypeQualifierValidator.class
 javax/annotation/meta/When.class
 kotlin/BuilderInference.class
+kotlin/ContextFunctionTypeParams.class
 kotlin/DeepRecursiveScope.class
 kotlin/Deprecated.class
 kotlin/DeprecatedSinceKotlin.class
@@ -415,6 +420,7 @@ kotlin/io/path/PathsKt__PathUtilsKt.class
 kotlin/js/ExperimentalJsExport.class
 kotlin/jvm/JvmClassMappingKt.class
 kotlin/jvm/JvmDefault.class
+kotlin/jvm/JvmDefaultWithCompatibility.class
 kotlin/jvm/JvmDefaultWithoutCompatibility.class
 kotlin/jvm/JvmField.class
 kotlin/jvm/JvmInline.class
@@ -435,6 +441,7 @@ kotlin/jvm/Transient.class
 kotlin/jvm/Volatile.class
 kotlin/jvm/internal/FunctionImpl.class
 kotlin/jvm/internal/RepeatableContainer.class
+kotlin/jvm/internal/SerializedIr.class
 kotlin/ranges/RangesKt___RangesKt.class
 kotlin/sequences/SequencesKt__SequenceBuilderKt.class
 kotlin/sequences/SequencesKt___SequencesKt.class

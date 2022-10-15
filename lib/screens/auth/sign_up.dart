@@ -467,12 +467,12 @@ class _LoginScreenState extends State<SignUp> {
         imageUrl = imageString;
       });
 
-      // await FirebaseFirestore.instance
-      //     .collection('users')
-      //     .doc(services.user!.uid)
-      //     .set({
-      //   'url': imageString,
-      // });
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(services.user!.uid)
+          .set({
+        'url': imageString,
+      });
     } catch (e) {
       showDialog(
           context: context,

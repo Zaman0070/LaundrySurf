@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:laundry_app/Admin/admin_screen.dart';
 import 'package:laundry_app/screens/home/main_screen.dart';
-import 'package:laundry_app/screens/rider/rider_screen.dart';
 
+import '../rider/rider_screen.dart';
 import '../screens/home/home_screen.dart';
 
 class FirebaseServices{
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  CollectionReference order = FirebaseFirestore.instance.collection('Order');
+
 
   User? user = FirebaseAuth.instance.currentUser;
 
@@ -202,6 +204,7 @@ class FirebaseServices{
     DocumentSnapshot doc = await users.doc(user!.uid).get();
     return doc;
   }
+
 /// Rider
   riderRegister(email,password, context,phone,url,name)async {
     try {
