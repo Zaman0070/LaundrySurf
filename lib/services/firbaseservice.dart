@@ -12,6 +12,20 @@ class FirebaseServices{
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   CollectionReference order = FirebaseFirestore.instance.collection('Order');
 
+  CollectionReference orderStep1 = FirebaseFirestore.instance.collection('OrderStep1');
+  CollectionReference orderStep2 = FirebaseFirestore.instance.collection('OrderStep2');
+  CollectionReference orderStep3 = FirebaseFirestore.instance.collection('OrderStep3');
+  CollectionReference orderStep4 = FirebaseFirestore.instance.collection('OrderStep4');
+  CollectionReference orderStep5 = FirebaseFirestore.instance.collection('OrderStep5');
+  CollectionReference orderStep6 = FirebaseFirestore.instance.collection('OrderStep6');
+  CollectionReference orderStep7 = FirebaseFirestore.instance.collection('OrderStep7');
+  CollectionReference orderStep8 = FirebaseFirestore.instance.collection('OrderStep8');
+  CollectionReference orderStep9 = FirebaseFirestore.instance.collection('OrderStep9');
+  CollectionReference orderStep10 = FirebaseFirestore.instance.collection('OrderStep10');
+  CollectionReference orderStep11 = FirebaseFirestore.instance.collection('OrderStep11');
+
+
+
 
   User? user = FirebaseAuth.instance.currentUser;
 

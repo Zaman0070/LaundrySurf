@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:laundry_app/provider/user_provider.dart';
 import 'package:laundry_app/screens/auth/login.dart';
+import 'package:laundry_app/screens/auth/loginadmin.dart';
+import 'package:laundry_app/screens/auth/loginrider.dart';
 import 'package:laundry_app/services/firbaseservice.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -36,7 +38,7 @@ class _OptionScreenState extends State<OptionScreen> {
             setState(() {
               index= 0;
             });
-            Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 0,)));
+            Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen()));
           },
           child: Container(
             height: 10.h,
@@ -68,7 +70,7 @@ class _OptionScreenState extends State<OptionScreen> {
               index = 1;
             });
 
-            Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 1,)));
+            Navigator.push(context, MaterialPageRoute(builder: (_)=>const AdminLoginScreen()));
           },
           child: Container(
             height: 10.h,
@@ -99,7 +101,7 @@ class _OptionScreenState extends State<OptionScreen> {
             setState(() {
               index =  2;
             });
-            Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 2,)));
+            Navigator.push(context, MaterialPageRoute(builder: (_)=>const RiderLoginScreen()));
           },
           child: Container(
             height: 10.h,

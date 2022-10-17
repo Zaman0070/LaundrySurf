@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:intl/intl.dart';
 import 'package:laundry_app/rider/rider_screen.dart';
+import 'package:laundry_app/services/firbaseservice.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -22,6 +25,56 @@ class PickOrderDetails extends StatefulWidget {
 }
 
 class _PickOrderDetailsState extends State<PickOrderDetails> {
+  TextEditingController DateController = TextEditingController();
+  TextEditingController TimeController = TextEditingController();
+  FirebaseServices services =FirebaseServices();
+  double? _height;
+  double? _width;
+
+  String? _setTime, _setDate;
+
+  String? _hour, _minute, _time;
+
+  String? dateTime;
+
+  DateTime selectedDate = DateTime.now();
+
+  TimeOfDay selectedTime = const TimeOfDay(hour: 00, minute: 00);
+
+
+  Future<void> _dSelectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        initialDatePickerMode: DatePickerMode.day,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2101));
+    if (picked != null) {
+      setState(() {
+        selectedDate = picked;
+        DateController.text = DateFormat.yMd().format(selectedDate);
+      });
+    }
+  }
+
+  Future<void> _pSelectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (picked != null) {
+      setState(() {
+        selectedTime = picked;
+        _hour = selectedTime.hour.toString();
+        _minute = selectedTime.minute.toString();
+        _time = '${_hour!} : ${_minute!}';
+        TimeController.text = _time!;
+        TimeController.text = formatDate(
+            DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
+            [hh, ':', nn, " ", am]).toString();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +166,94 @@ class _PickOrderDetailsState extends State<PickOrderDetails> {
               ),
             ),
             SizedBox(height: 1.h,),
+            Row(
+              children: <Widget>[
+                InkWell(
+                  onTap: () {
+                    _dSelectDate(context);
+                  },
+                  child: Container(
+                    width: 20.h,
+                    height: 5.h,
+                    margin: const EdgeInsets.only(top: 10),
+                    alignment: Alignment.center,
+                    child: TextFormField(
+                      style: const TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                      enabled: false,
+                      keyboardType: TextInputType.text,
+                      controller: DateController,
+                      onSaved: (val) {
+                        _setDate = val;
+                      },
+                      decoration: InputDecoration(
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(
+                              'assets/icons/deliver.png',
+                              height: 2.h,
+                            ),
+                          ),
+                          labelText: widget.index==0?'Pick Date':'Deliver Time',
+                          labelStyle:
+                          const TextStyle(color: Colors.black),
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
+                          ),
+                          // disabledBorder:
+                          // UnderlineInputBorder(borderSide: BorderSide.none),
+                          // labelText: 'Time',
+                          contentPadding:
+                          const EdgeInsets.only(top: 0.0)),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    _pSelectTime(context);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    width: 20.h,
+                    height: 5.h,
+                    alignment: Alignment.center,
+                    child: TextFormField(
+                      style: const TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                      onSaved: (val) {
+                        _setTime = val;
+                      },
+                      enabled: false,
+                      keyboardType: TextInputType.text,
+                      controller: TimeController,
+                      decoration: InputDecoration(
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(
+                              'assets/icons/deliver.png',
+                              height: 2.h,
+                            ),
+                          ),
+                          labelText: widget.index==0?'Pick Time':'Deliver Time',
+                          labelStyle:
+                          const TextStyle(color: Colors.black),
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
+                          // labelText: 'Time',
+                          contentPadding: const EdgeInsets.all(5)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 1.h,),
             Container(
               height: 8.h,
               width: 100.w,
@@ -141,15 +282,48 @@ class _PickOrderDetailsState extends State<PickOrderDetails> {
                   'orderUrl': data['orderUrl'],
                   'pickTime':  data['pickTime'],
                   'pickupDate': data['pickupDate'],
-                  'deliverTime':  data['deliverTime'],
-                  'deliverDate':  data['deliverDate'],
+                  'deliverTime': TimeController.text,
+                  'deliverDate':  DateController.text,
                   'orderFor':  data['orderFor'],
-                  'orderStatus': widget.index==0?'RiderPickOrder & DeliverToLaundryHub':"Delivered",
+                  'orderStatus': widget.index==0?'RiderPickOrder':"Delivered",
                   'orderPlacerId': data['orderPlacerId'],
                   'orderTime': data['orderTime'],
                   'price': data['price'],
                   'riderAssign':data['riderAssign']
                 });
+                if(widget.index==0){
+                  services.orderStep5.doc().set({
+                    'orderName': data['orderName'],
+                    'orderQuantity': data['orderQuantity'],
+                    'orderUrl': data['orderUrl'],
+                    'pickTime':  data['pickTime'],
+                    'pickupDate': data['pickupDate'],
+                    'deliverTime': TimeController.text,
+                    'deliverDate':  DateController.text,
+                    'orderFor':  data['orderFor'],
+                    'orderStatus': 'RiderPickOrder',
+                    'orderPlacerId': data['orderPlacerId'],
+                    'orderTime': data['orderTime'],
+                    'price': data['price'],
+                    'riderAssign':data['riderAssign']
+                  });
+                }else{
+                  services.orderStep10.doc().set({
+                    'orderName': data['orderName'],
+                    'orderQuantity': data['orderQuantity'],
+                    'orderUrl': data['orderUrl'],
+                    'pickTime':  data['pickTime'],
+                    'pickupDate': data['pickupDate'],
+                    'deliverTime': TimeController.text,
+                    'deliverDate':  DateController.text,
+                    'orderFor':  data['orderFor'],
+                    'orderStatus': 'Delivered',
+                    'orderPlacerId': data['orderPlacerId'],
+                    'orderTime': data['orderTime'],
+                    'price': data['price'],
+                    'riderAssign':data['riderAssign']
+                  });
+                }
                 ScaffoldMessenger.of(context).showSnackBar(
                    SnackBar(
                     content: Text(widget.index==0?'Order has been successfully Picked!':'Order has been successfully Delivered!'),
@@ -167,7 +341,7 @@ class _PickOrderDetailsState extends State<PickOrderDetails> {
                     color: const Color(0xff27C1F9)
                 ),
                 child: Center(
-                  child: Text(widget.index==0?'Confirmed Pick':"Confirmed Delivered",style: TextStyle(color: Colors.white),),
+                  child: Text(widget.index==0?'Pick':"Delivered",style: TextStyle(color: Colors.white),),
                 ),
               ),
             ),

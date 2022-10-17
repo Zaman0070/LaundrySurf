@@ -18,8 +18,8 @@ import 'package:sizer/sizer.dart';
 import '../home/home_screen.dart';
 
 class SignUp extends StatefulWidget {
-  final int? index;
-  const SignUp({Key? key,required this.index}) : super(key: key);
+
+  const SignUp({Key? key,}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -206,8 +206,8 @@ class _LoginScreenState extends State<SignUp> {
 
             if(formKey.currentState!.validate()){
               if(imageUrl!=null){
-              widget.index == 0 ? services.userRegister(emailTextController.text, passwordTextController.text, context, phoneTextController.text,imageUrl,nameTextController.text):
-              services.adminRegister(emailTextController.text, passwordTextController.text, context, phoneTextController.text,imageUrl,nameTextController.text,);
+              services.userRegister(emailTextController.text, passwordTextController.text, context, phoneTextController.text,imageUrl,nameTextController.text);
+
             }
             else{
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -239,13 +239,8 @@ class _LoginScreenState extends State<SignUp> {
   Widget _buildSignupBtn() {
     return GestureDetector(
       onTap: (){
-        if(widget.index == 0){
-          Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 0,)));
-        }else if(widget.index == 1){
-          Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 1,)));
-        }else{
-          Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 2,)));
-        }
+          Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen()));
+
       },
       child: RichText(
         text: const TextSpan(
@@ -320,7 +315,7 @@ class _LoginScreenState extends State<SignUp> {
                           height: 3.h,
                         ),
                         Text(
-                          widget.index==0?"Create an account":widget.index==1?'Create admin account': '',
+                         "Create an account",
                           style: TextStyle(
                             color:const Color(0xff27C1F9),
                             fontFamily: 'OpenSans',

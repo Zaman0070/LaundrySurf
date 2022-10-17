@@ -16,8 +16,7 @@ import 'forget_passwod.dart';
 import 'google.dart';
 
 class LoginScreen extends StatefulWidget {
-  final int? index;
-  const LoginScreen({Key? key,required this.index}) : super(key: key);
+  const LoginScreen({Key? key,}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -125,15 +124,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildSignupBtn() {
     return GestureDetector(
       onTap: (){
-        if(widget.index == 0){
-          Navigator.push(context, MaterialPageRoute(builder: (_)=>const SignUp(index: 0,)));
-        }else if(widget.index == 1){
-          Navigator.push(context, MaterialPageRoute(builder: (_)=>const SignUp(index: 1,)));
-        }else{
-          Navigator.push(context, MaterialPageRoute(builder: (_)=>const SignUp(index: 2,)));
-        }
+
+          Navigator.push(context, MaterialPageRoute(builder: (_)=>const SignUp()));
+
       },
-      child:widget.index==0 ? RichText(
+      child:RichText(
         text: const TextSpan(
           children: [
             TextSpan(
@@ -154,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ],
         ),
-      ):widget.index==1 ? Container(): Container(),
+      )
     );
   }
 
@@ -162,37 +157,95 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var userProvider = Provider.of<UserProvider>(context);
     var data = userProvider.userData;
-
     Widget _buildLoginBtn() {
-      return Container(
-        padding: const EdgeInsets.symmetric(vertical: 25.0),
-        width: double.infinity,
-        child: RaisedButton(
-          elevation: 5.0,
-          onPressed: () {
-            if(formKey.currentState!.validate()){
-                widget.index == 0 ? services.userLogin(emailTextController.text, passwordTextController.text, context,):widget.index==1?
-                services.adminLogin(emailTextController.text, passwordTextController.text, context,):services.riderLogin(emailTextController.text, passwordTextController.text, context);
+      return FutureBuilder<QuerySnapshot>(
+          future: services.users.where('type',isEqualTo: 'user').get(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return const Text('Some things wrong');
             }
-          },
-          padding: const EdgeInsets.all(15.0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          color: const Color(0xff27C1F9),
-          child: const Text(
-            'LOGIN',
-            style: TextStyle(
-              color: Colors.white,
-              letterSpacing: 1.5,
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-            ),
-          ),
-        ),
-      );
-    }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            }
+            return ListView.builder(
+                shrinkWrap: true,
+                physics: ScrollPhysics(),
+                itemCount: 1,
+                itemBuilder: (BuildContext context, int index) {
+                  var data = snapshot.data!.docs[index];
+                  return Container(
+                    padding: const EdgeInsets.symmetric(vertical: 25.0),
+                    width: double.infinity,
+                    child: RaisedButton(
+                      elevation: 5.0,
+                      onPressed: () {
+                        if(formKey.currentState!.validate()){
+                          if(data['type']=='user'){
+                            services.userLogin(emailTextController.text, passwordTextController.text, context);
+                          }
+                          else{
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content:
+                              Text('This Account are not login as User !'),
+                              ),
+                            );
+                          }
+                        }
+                      },
+                      padding: const EdgeInsets.all(15.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      color: const Color(0xff27C1F9),
+                      child: const Text(
+                        'LOGIN',
+                        style: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 1.5,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                        ),
+                      ),
+                    ),
+                  );
+                }
+                  );
+                });
+
+          }
+
+
+    // Widget _buildLoginBtn() {
+    //   return Container(
+    //     padding: const EdgeInsets.symmetric(vertical: 25.0),
+    //     width: double.infinity,
+    //     child: RaisedButton(
+    //       elevation: 5.0,
+    //       onPressed: () {
+    //         if(formKey.currentState!.validate()){
+    //             widget.index == 0 ? services.userLogin(emailTextController.text, passwordTextController.text, context,):widget.index==1?
+    //             services.adminLogin(emailTextController.text, passwordTextController.text, context,):services.riderLogin(emailTextController.text, passwordTextController.text, context);
+    //         }
+    //       },
+    //       padding: const EdgeInsets.all(15.0),
+    //       shape: RoundedRectangleBorder(
+    //         borderRadius: BorderRadius.circular(10.0),
+    //       ),
+    //       color: const Color(0xff27C1F9),
+    //       child: const Text(
+    //         'LOGIN',
+    //         style: TextStyle(
+    //           color: Colors.white,
+    //           letterSpacing: 1.5,
+    //           fontSize: 18.0,
+    //           fontWeight: FontWeight.bold,
+    //           fontFamily: 'OpenSans',
+    //         ),
+    //       ),
+    //     ),
+    //   );
+    // }
     return Scaffold(
       body: Form(
         key: formKey,
@@ -213,10 +266,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     physics: const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20.0,
-                      vertical: 120.0,
+                      vertical: 80.0,
                     ),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+
                       children: <Widget>[
                        // Text(data!.docs.first['']),
                         Image.asset(
@@ -228,7 +281,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 6.h,
                         ),
                         Text(
-                          widget.index == 0 ?"Let's Login": widget.index==1? "Login as a Admin":"Login as a Rider",
+                         "Let's Login",
                           style: TextStyle(
                             color: Theme.of(context).backgroundColor,
                             fontFamily: 'OpenSans',
@@ -245,13 +298,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           height: 1.h,
                         ),
-                       widget.index==0? forgetPassword():widget.index==1?forgetPassword():Container(),
+                      forgetPassword(),
                         SizedBox(
-                          height: 3.h,
+                          height: 2.h,
                         ),
                         _buildLoginBtn(),
 
-                        widget.index == 0 ? SignInButton(
+                   SignInButton(
                           Buttons.google,
                           text: "Sign up with Google",
                           onPressed: ()async {
@@ -261,7 +314,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                services.addUser(context, user.uid);
                             }
                           },
-                        ):widget.index==1 ? Container(): Container(),
+                        ),
                         SizedBox(
                           height: 6.h,
                         ),

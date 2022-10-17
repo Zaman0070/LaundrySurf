@@ -85,6 +85,7 @@ MERGED from [:google_maps_flutter_android] /Users/apple/StudioProjects/laundry_a
 MERGED from [:image_picker_android] /Users/apple/StudioProjects/laundry_app/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-21:12
 MERGED from [:flutter_plugin_android_lifecycle] /Users/apple/StudioProjects/laundry_app/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:geocoding] /Users/apple/StudioProjects/laundry_app/build/geocoding/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:path_provider_android] /Users/apple/StudioProjects/laundry_app/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-20:12
 MERGED from [:google_sign_in_android] /Users/apple/StudioProjects/laundry_app/build/google_sign_in_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/apple/.gradle/caches/transforms-3/0fbff5502764710f53ba7c811cca9d9e/transformed/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
@@ -248,6 +249,8 @@ MERGED from [:flutter_plugin_android_lifecycle] /Users/apple/StudioProjects/laun
 MERGED from [:flutter_plugin_android_lifecycle] /Users/apple/StudioProjects/laundry_app/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:geocoding] /Users/apple/StudioProjects/laundry_app/build/geocoding/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:geocoding] /Users/apple/StudioProjects/laundry_app/build/geocoding/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:path_provider_android] /Users/apple/StudioProjects/laundry_app/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:path_provider_android] /Users/apple/StudioProjects/laundry_app/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:location] /Users/apple/StudioProjects/laundry_app/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:google_sign_in_android] /Users/apple/StudioProjects/laundry_app/build/google_sign_in_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41

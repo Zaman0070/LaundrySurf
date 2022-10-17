@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:laundry_app/Admin/admin_screen.dart';
 import 'package:laundry_app/screens/auth/login.dart';
+import 'package:laundry_app/screens/auth/loginadmin.dart';
+import 'package:laundry_app/screens/auth/loginrider.dart';
 import 'package:laundry_app/screens/splash/onboardScreen.dart';
 import 'package:laundry_app/services/firbaseservice.dart';
 
@@ -19,8 +21,6 @@ class UserNavigationPage extends StatefulWidget {
 
 class _UserNavigationPageState extends State<UserNavigationPage> {
   FirebaseServices services = FirebaseServices();
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +54,7 @@ class _UserNavigationPageState extends State<UserNavigationPage> {
               if (data['type']=='rider'){
                 return const RiderScreen();
               }
-
-              return  data['type']=='user'? const LoginScreen(index: 0,):data['type']=='admin'? const LoginScreen(index: 1,):const LoginScreen(index: 2,);
+              return  data['type']=='user'? const LoginScreen():data['type']=='admin'? const AdminLoginScreen():const RiderLoginScreen();
 
             },
             // Navigator.of(context).pop();

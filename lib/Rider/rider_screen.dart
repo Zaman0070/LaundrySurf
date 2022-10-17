@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:laundry_app/Rider/confirmed/confirmed_order.dart';
 import 'package:laundry_app/Rider/pick_order_list.dart';
 import 'package:sizer/sizer.dart';
 
@@ -30,7 +31,34 @@ class _RiderScreenState extends State<RiderScreen> {
         padding: const EdgeInsets.all(12.0),
         child: ListView(
           children: [
-
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: InkWell(
+                onTap:(){
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=> RiderConfirmedOrder(index: 0,)));
+                },
+                child: Container(
+                  height: 12.h,
+                  width: 100.w,
+                  decoration: BoxDecoration(
+                      color: const Color(0xff27C1F9).withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(20)
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(width: 2.h,),
+                      Image.asset('assets/icons/confirm.png',height: 6.h,),
+                      SizedBox(width: 2.h,),
+                      Text('Confirmed pick order',style: TextStyle(
+                          fontSize: 16.sp,fontWeight: FontWeight.bold
+                      ),)
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 1.h,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: InkWell(
@@ -51,6 +79,34 @@ class _RiderScreenState extends State<RiderScreen> {
                       Image.asset('assets/images/pick.png',height: 7.h,color: Colors.red,),
                       SizedBox(width: 2.h,),
                       Text('Pickup Order List',style: TextStyle(
+                          fontSize: 16.sp,fontWeight: FontWeight.bold
+                      ),)
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 1.h,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: InkWell(
+                onTap:(){
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=> RiderConfirmedOrder(index: 1,)));
+                },
+                child: Container(
+                  height: 12.h,
+                  width: 100.w,
+                  decoration: BoxDecoration(
+                      color: const Color(0xff27C1F9).withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(20)
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(width: 2.h,),
+                      Image.asset('assets/icons/confirm.png',height: 6.h,),
+                      SizedBox(width: 2.h,),
+                      Text('Confirmed Deliver order',style: TextStyle(
                           fontSize: 16.sp,fontWeight: FontWeight.bold
                       ),)
                     ],

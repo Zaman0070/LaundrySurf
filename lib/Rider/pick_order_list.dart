@@ -26,12 +26,12 @@ class _PickOrderListState extends State<PickOrderList> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
-        title:  Text('Pickup Order List',style: TextStyle(color: Colors.black,fontSize: 18.sp),),
+        title:  Text(widget.index==0?'Pickup Order List':"Deliver Order List",style: TextStyle(color: Colors.black,fontSize: 18.sp),),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
       body:  FutureBuilder<QuerySnapshot>(
-        future: services.order.where('orderStatus',isEqualTo: widget.index == 0?'assignToRiderForPick':'assignToRiderForDeliver').where('riderAssign',isEqualTo: services.user!.uid)
+        future: services.order.where('orderStatus',isEqualTo: widget.index == 0?'ConfirmedForPick':'ConfirmedDeliver').where('riderAssign',isEqualTo: services.user!.uid)
             .orderBy('orderTime')
             .get(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {

@@ -49,10 +49,54 @@ class OrderProvider with ChangeNotifier {
     int? orderTime,
     int? price,
     String? description,
+    String? OPId,
 
   }) async {
 
     await services.order.doc(orderId)
+        .set({
+      'orderId': order.doc(orderId),
+      'orderName': orderName,
+      'orderUrl': orderUrl,
+      'orderQuantity': orderQuantity,
+      'pickupDate':pickupDate,
+      'pickTime':pickTime,
+      'deliverDate':deliverDate,
+      'deliverTime':deliverTime,
+      'orderFor':orderFor,
+      'latitude':setLocation!.latitude,
+      'longitude':setLocation!.longitude,
+      'orderStatus':orderStatus,
+      'orderPlacerId':orderPlacerId,
+      'orderTime':orderTime,
+      'price':'',
+      'riderAssign':'',
+      'orderNumber':random1.toString(),
+      "description":description,
+    });
+  }
+
+  void addOrderStep({
+    CollectionReference? collectionReference,
+    String? orderId,
+    String? orderName,
+    List<String>? orderUrl,
+    String? orderQuantity,
+    String? pickupDate,
+    String? pickTime,
+    String? deliverDate,
+    String? deliverTime,
+    String? orderFor,
+    String? orderStatus,
+    String? orderPlacerId,
+    int? orderTime,
+    String? price,
+    String? description,
+    String? OPId,
+
+  }) async {
+
+    await collectionReference!.doc(orderId)
         .set({
       'orderId': order.doc(orderId),
       'orderName': orderName,

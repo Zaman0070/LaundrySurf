@@ -11,12 +11,7 @@ class ForgetPassword extends StatelessWidget {
 
   var emailController = TextEditingController();
   final formKey  = GlobalKey<FormState>();
-
-
   bool validate = true;
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +29,7 @@ class ForgetPassword extends StatelessWidget {
               if(formKey.currentState!.validate()){
                 FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text)
                     .then((value) {
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen(index: 0,)));
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen()));
                 });
 
               }

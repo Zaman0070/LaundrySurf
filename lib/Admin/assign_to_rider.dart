@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:laundry_app/Admin/about_rider/search_rider.dart';
+import 'package:laundry_app/Admin/admin_screen.dart';
 import 'package:laundry_app/provider/user_provider.dart';
 import 'package:laundry_app/services/firbaseservice.dart';
 import 'package:provider/provider.dart';
@@ -20,13 +21,13 @@ class AssignToRider extends StatefulWidget {
 
 class _AssignToRiderState extends State<AssignToRider> {
   RiderSearchService riderSearchService = RiderSearchService();
-  FirebaseServices service = FirebaseServices();
+  FirebaseServices services = FirebaseServices();
   static List<Rider> users = [];
 
 
   @override
   void initState() {
-    service.users.get().then((QuerySnapshot snapshot) {
+    services.users.get().then((QuerySnapshot snapshot) {
       for (var doc in snapshot.docs) {
         setState(() {
           users.add(
@@ -113,7 +114,7 @@ class _AssignToRiderState extends State<AssignToRider> {
               ),
             ),
             FutureBuilder<QuerySnapshot>(
-              future: service.users.where('type',isEqualTo: 'rider').get(),
+              future: services.users.where('type',isEqualTo: 'rider').get(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
                   return const Text('Some things wrong');
@@ -189,11 +190,41 @@ class _AssignToRiderState extends State<AssignToRider> {
                                                     'price': orderData['price'],
                                                     'riderAssign':snapshot.data!.docs[index].id
                                                   });
-                                                  // setState(() {
-                                                  //   deleteUser(snapshot.data!
-                                                  //       .docs[index].id);
-                                                  // });
-                                                  Navigator.pop(context);
+                                                  if(widget.index==0){
+                                                    services.orderStep3.doc().set({
+                                                      'orderName': orderData['orderName'],
+                                                      'orderQuantity': orderData['orderQuantity'],
+                                                      'orderUrl': orderData['orderUrl'],
+                                                      'pickTime':  orderData['pickTime'],
+                                                      'pickupDate': orderData['pickupDate'],
+                                                      'deliverTime':  orderData['deliverTime'],
+                                                      'deliverDate':  orderData['deliverDate'],
+                                                      'orderFor':  orderData['orderFor'],
+                                                      'orderStatus': 'assignToRiderForPick',
+                                                      'orderPlacerId': orderData['orderPlacerId'],
+                                                      'orderTime': orderData['orderTime'],
+                                                      'price': orderData['price'],
+                                                      'riderAssign':snapshot.data!.docs[index].id
+                                                    });
+                                                  }else{
+                                                    services.orderStep8.doc().set({
+                                                      'orderName': orderData['orderName'],
+                                                      'orderQuantity': orderData['orderQuantity'],
+                                                      'orderUrl': orderData['orderUrl'],
+                                                      'pickTime':  orderData['pickTime'],
+                                                      'pickupDate': orderData['pickupDate'],
+                                                      'deliverTime':  orderData['deliverTime'],
+                                                      'deliverDate':  orderData['deliverDate'],
+                                                      'orderFor':  orderData['orderFor'],
+                                                      'orderStatus': 'assignToRiderForDeliver',
+                                                      'orderPlacerId': orderData['orderPlacerId'],
+                                                      'orderTime': orderData['orderTime'],
+                                                      'price': orderData['price'],
+                                                      'riderAssign':snapshot.data!.docs[index].id
+                                                    });
+                                                  }
+
+                                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const AdminScreen()));
                                                 },
                                                 child: const Text('Yes'),
                                               )
