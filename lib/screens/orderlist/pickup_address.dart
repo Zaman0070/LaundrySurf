@@ -20,15 +20,31 @@ class _PickUpAddressState extends State<PickUpAddress> {
         borderRadius: BorderRadius.circular(10),
         color: Colors.white
       ),
-      child: Row(
-        children: [
-          Image.asset('assets/icons/location.png',height: 2.5.h,),
-          InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (_)=>const CustomGoogleMap()));
-              },
-              child: Text('Pickup Address',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 15.sp),)),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=>const CustomGoogleMap()));
+                },
+                child: Row(
+                  children: [
+                    Image.asset('assets/icons/location.png',height: 2.5.h,),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(' Pickup Address',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 15.sp),),
+                        Text(' Your Current Location',style: TextStyle(color: Colors.grey,fontWeight: FontWeight.w500,fontSize: 12.sp),),
+                      ],
+                    ),
+                  ],
+                ),
+            ),
+            Text('Change',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 15.sp),),
+          ],
+        ),
       ),
     );
   }

@@ -66,8 +66,22 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
       });
     }
   }
+  Future<void> _orderPostingSelectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        initialDatePickerMode: DatePickerMode.day,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2101));
+    if (picked != null) {
+      setState(() {
+        selectedDate = picked;
+        deliverDateController.text = DateFormat.yMd().format(selectedDate);
+      });
+    }
+  }
 
-  Future<void> _pSelectTime(BuildContext context) async {
+  Future<void> _pFSelectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: selectedTime,
@@ -78,15 +92,33 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
         _hour = selectedTime.hour.toString();
         _minute = selectedTime.minute.toString();
         _time = '${_hour!} : ${_minute!}';
-        pickTimeController.text = _time!;
-        pickTimeController.text = formatDate(
+        pickFromTimeController.text = _time!;
+        pickFromTimeController.text = formatDate(
+            DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
+            [hh, ':', nn, " ", am]).toString();
+      });
+    }
+  }
+  Future<void> _pTSelectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (picked != null) {
+      setState(() {
+        selectedTime = picked;
+        _hour = selectedTime.hour.toString();
+        _minute = selectedTime.minute.toString();
+        _time = '${_hour!} : ${_minute!}';
+        pickToTimeController.text = _time!;
+        pickToTimeController.text = formatDate(
             DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
             [hh, ':', nn, " ", am]).toString();
       });
     }
   }
 
-  Future<void> _dSelectTime(BuildContext context) async {
+  Future<void> _dFSelectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: selectedTime,
@@ -97,8 +129,26 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
         _hour = selectedTime.hour.toString();
         _minute = selectedTime.minute.toString();
         _time = '${_hour!} : ${_minute!}';
-        deliverTimeController.text = _time!;
-        deliverTimeController.text = formatDate(
+        deliverFromTimeController.text = _time!;
+        deliverFromTimeController.text = formatDate(
+            DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
+            [hh, ':', nn, " ", am]).toString();
+      });
+    }
+  }
+  Future<void> _dTSelectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (picked != null) {
+      setState(() {
+        selectedTime = picked;
+        _hour = selectedTime.hour.toString();
+        _minute = selectedTime.minute.toString();
+        _time = '${_hour!} : ${_minute!}';
+        deliverToTimeController.text = _time!;
+        deliverToTimeController.text = formatDate(
             DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
             [hh, ':', nn, " ", am]).toString();
       });
@@ -107,13 +157,20 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    orderPlaceDateController.text = DateFormat.yMd().format(DateTime.now());
     pickDateController.text = DateFormat.yMd().format(DateTime.now());
     deliverDateController.text = DateFormat.yMd().format(DateTime.now());
 
-    pickTimeController.text = formatDate(
+    pickFromTimeController.text = formatDate(
         DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
         [hh, ':', nn, " ", am]).toString();
-    deliverTimeController.text = formatDate(
+    pickToTimeController.text = formatDate(
+        DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
+        [hh, ':', nn, " ", am]).toString();
+    deliverFromTimeController.text = formatDate(
+        DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
+        [hh, ':', nn, " ", am]).toString();
+    deliverToTimeController.text = formatDate(
         DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
         [hh, ':', nn, " ", am]).toString();
     super.initState();
@@ -125,14 +182,14 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
   FirebaseServices services = FirebaseServices();
 
   /// textEditing controller
-  TextEditingController brandController = TextEditingController();
-  TextEditingController orderForController = TextEditingController();
-  TextEditingController quantityController = TextEditingController();
+  TextEditingController orderPlaceDateController = TextEditingController();
   TextEditingController pickDateController = TextEditingController();
   TextEditingController deliverDateController = TextEditingController();
-  TextEditingController pickTimeController = TextEditingController();
-  TextEditingController deliverTimeController = TextEditingController();
+  TextEditingController pickFromTimeController = TextEditingController();
+  TextEditingController deliverFromTimeController = TextEditingController();
   TextEditingController descController = TextEditingController();
+  TextEditingController pickToTimeController = TextEditingController();
+  TextEditingController deliverToTimeController = TextEditingController();
 
   List<String> orderFor(BuildContext context) =>
       ['wash', 'ironing', 'fold', 'dry', 'cleaner'];
@@ -263,7 +320,7 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
           icon: const Icon(Icons.arrow_back),
         ),
         title: const Text(
-          'Order List',
+          'New Order',
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -274,34 +331,33 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
               if(formKey.currentState!.validate())
              {
                  orderProvider.addOrderData(
-                   orderName: brandController.text,
-                   orderQuantity: quantityController.text,
                    orderUrl: orderProvider.urlList,
-                   pickTime: pickTimeController.text,
                    pickupDate: pickDateController.text,
-                   deliverTime: deliverTimeController.text,
                    deliverDate: deliverDateController.text,
-                   orderFor: orderForController.text,
+                   orderPostingDate: pickDateController.text,
                    orderStatus: 'Submit',
                    orderPlacerId:services.user!.uid,
                    orderTime: DateTime.now().microsecondsSinceEpoch,
                    description: descController.text,
+                   pickTimeFrom: pickFromTimeController.text,
+                   pickTimeTo: pickToTimeController.text,
+                   deliverTimeFrom: deliverFromTimeController.text,
+                   deliverTimeTo: deliverToTimeController.text,
                  );
-                 orderProvider.addOrderStep(
-                   collectionReference: services.orderStep1,
-                   orderName: brandController.text,
-                   orderQuantity: quantityController.text,
-                   pickTime: pickTimeController.text,
-                   pickupDate: pickDateController.text,
-                   deliverTime: deliverTimeController.text,
-                   deliverDate: deliverDateController.text,
-                   orderFor: orderForController.text,
-                   orderStatus: 'Submit',
-                   orderPlacerId:services.user!.uid,
-                   orderTime: DateTime.now().microsecondsSinceEpoch,
-                   description: descController.text,
-                 );
-
+                 services.orderStep1.doc().set({
+                   'orderUrl': orderProvider.urlList,
+                   'pickupDate': pickDateController.text,
+                   'deliverDate': deliverDateController.text,
+                   'orderPostingDate': pickDateController.text,
+                   'orderStatus': 'Submit',
+                   'orderPlacerId':services.user!.uid,
+                   'orderTime': DateTime.now().microsecondsSinceEpoch,
+                   'description': descController.text,
+                   'pickTimeFrom': pickFromTimeController.text,
+                   'pickTimeTo': pickToTimeController.text,
+                   'deliverTimeFrom': deliverFromTimeController.text,
+                   'deliverTimeTo': deliverToTimeController.text,
+                 });
              }
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
@@ -335,375 +391,305 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Schedule Date & Time",
-                      style: TextStyle(
-                          color: const Color(0xff381568),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16.sp),
+                    // Text(
+                    //   "Schedule Date & Time",
+
+                    SizedBox(height: 1.h,),
+                     Text('Pick Date & Time',style: TextStyle(
+                        color:  Color(0xff381568),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.sp),
                     ),
-                    Row(
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            _pSelectDate(context);
-                          },
-                          child: Container(
-                            width: 20.h,
-                            height: 4.h,
-                            margin: const EdgeInsets.only(top: 15),
-                            alignment: Alignment.center,
-                            child: TextFormField(
-                              style: const TextStyle(fontSize: 12),
-                              textAlign: TextAlign.center,
-                              enabled: false,
-                              keyboardType: TextInputType.text,
-                              controller: pickDateController,
-                              onSaved: (val) {
-                                _setDate = val;
+                    SizedBox(height: 1.h,),
+                    Container(
+                      height: 6.2.h,
+                      width: 100.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey,width: 1),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                _pSelectDate(context);
                               },
-                              decoration: InputDecoration(
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      'assets/icons/pick.png',
-                                      height: 2.h,
-                                    ),
-                                  ),
-                                  labelText: 'Pickup Date',
-                                  labelStyle:
-                                      const TextStyle(color: Colors.black),
-                                  border: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      bottomLeft: Radius.circular(10),
-                                    ),
-                                  ),
-                                  // disabledBorder:
-                                  // UnderlineInputBorder(borderSide: BorderSide.none),
-                                  // labelText: 'Time',
-                                  contentPadding:
-                                      const EdgeInsets.only(top: 0.0)),
+                              child: Container(
+                                height: 6.h,
+                                width: 42.w,
+                                alignment: Alignment.center,
+                                child: TextFormField(
+                                  style: const TextStyle(fontSize: 16),
+                                  textAlign: TextAlign.center,
+                                  enabled: false,
+                                  keyboardType: TextInputType.text,
+                                  controller: pickDateController,
+                                  onSaved: (val) {
+                                    _setDate = val;
+                                  },
+                                  decoration: const InputDecoration(
+
+
+                                      labelStyle:
+                                      TextStyle(color: Colors.black),
+                                      border:  InputBorder.none,
+                                      // disabledBorder:
+                                      // UnderlineInputBorder(borderSide: BorderSide.none),
+                                      // labelText: 'Time',
+                                      contentPadding:
+                                      EdgeInsets.only(top: 0.0)),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            _pSelectTime(context);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(top: 15),
-                            width: 20.h,
-                            height: 4.h,
-                            alignment: Alignment.center,
-                            child: TextFormField(
-                              style: const TextStyle(fontSize: 12),
-                              textAlign: TextAlign.center,
-                              onSaved: (val) {
-                                _setTime = val;
-                              },
-                              enabled: false,
-                              keyboardType: TextInputType.text,
-                              controller: pickTimeController,
-                              decoration: InputDecoration(
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      'assets/icons/pick.png',
-                                      height: 2.h,
+                            SizedBox(width: 3.w,),
+
+                            Container(
+                              height: 6.h,
+                              width: 42.w,
+
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 0.4.h,),
+                                  InkWell(
+                                    onTap: () {
+                                      _pFSelectTime(context);
+                                    },
+                                    child: Container(
+                                      height: 2.7.h,
+                                      child: TextFormField(
+                                        style: const TextStyle(fontSize: 12),
+                                       // textAlign: TextAlign.center,
+                                        onSaved: (val) {
+                                          _setTime = val;
+                                        },
+                                        enabled: false,
+                                        keyboardType: TextInputType.text,
+                                        controller: pickFromTimeController,
+                                        decoration:  const InputDecoration(
+                                          prefixIcon: Text(' From:'),
+                                            contentPadding: EdgeInsets.only(top: -11),
+                                            border: InputBorder.none,
+                                            // labelText: 'Time',
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                  labelText: 'Pickup Time',
-                                  labelStyle:
-                                      const TextStyle(color: Colors.black),
-                                  border: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(10),
-                                      bottomRight: Radius.circular(10),
+                                  InkWell(
+                                    onTap: () {
+                                      _pFSelectTime(context);
+                                    },
+                                    child: Container(
+                                      height: 2.7.h,
+                                      child: TextFormField(
+                                        style: const TextStyle(fontSize: 12),
+                                       // textAlign: TextAlign.center,
+                                        onSaved: (val) {
+                                          _setTime = val;
+                                        },
+                                        enabled: false,
+                                        keyboardType: TextInputType.text,
+                                        controller: pickFromTimeController,
+                                        decoration:  const InputDecoration(
+                                            prefixIcon: Text(' To:'),
+                                          contentPadding: EdgeInsets.only(top: -11),
+                                            // labelText: 'TO',
+                                            labelStyle:
+                                            TextStyle(color: Colors.black),
+                                            border:InputBorder.none,
+                                            // labelText: 'Time',
+                                           ),
+                                      ),
                                     ),
                                   ),
-                                  // labelText: 'Time',
-                                  contentPadding: const EdgeInsets.all(5)),
+                                ],
+                              ),
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            _dSelectDate(context);
-                          },
-                          child: Container(
-                            width: 20.h,
-                            height: 4.h,
-                            margin: const EdgeInsets.only(top: 10),
-                            alignment: Alignment.center,
-                            child: TextFormField(
-                              style: const TextStyle(fontSize: 12),
-                              textAlign: TextAlign.center,
-                              enabled: false,
-                              keyboardType: TextInputType.text,
-                              controller: deliverDateController,
-                              onSaved: (val) {
-                                _setDate = val;
-                              },
-                              decoration: InputDecoration(
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      'assets/icons/deliver.png',
-                                      height: 2.h,
-                                    ),
-                                  ),
-                                  labelText: 'Deliver Date',
-                                  labelStyle:
-                                      const TextStyle(color: Colors.black),
-                                  border: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      bottomLeft: Radius.circular(10),
-                                    ),
-                                  ),
-                                  // disabledBorder:
-                                  // UnderlineInputBorder(borderSide: BorderSide.none),
-                                  // labelText: 'Time',
-                                  contentPadding:
-                                      const EdgeInsets.only(top: 0.0)),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            _dSelectTime(context);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(top: 10),
-                            width: 20.h,
-                            height: 4.h,
-                            alignment: Alignment.center,
-                            child: TextFormField(
-                              style: const TextStyle(fontSize: 12),
-                              textAlign: TextAlign.center,
-                              onSaved: (val) {
-                                _setTime = val;
-                              },
-                              enabled: false,
-                              keyboardType: TextInputType.text,
-                              controller: deliverTimeController,
-                              decoration: InputDecoration(
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      'assets/icons/deliver.png',
-                                      height: 2.h,
-                                    ),
-                                  ),
-                                  labelText: 'Deliver Time',
-                                  labelStyle:
-                                      const TextStyle(color: Colors.black),
-                                  border: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(10),
-                                      bottomRight: Radius.circular(10),
-                                    ),
-                                  ),
-                                  // labelText: 'Time',
-                                  contentPadding: const EdgeInsets.all(5)),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Choose Items Type',
-                      style: TextStyle(fontSize: 13.sp),
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        smalBottomSheet(
-                            // fieldValue: 'Choose Area',
-                            list: brand(context),
-                            textController: brandController);
-                      },
-                      child: Container(
-                        height: 6.h,
-                        width: 100.w,
-                        decoration: BoxDecoration(
-                          color: const Color(0xff27C1F9).withOpacity(0.15),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: TextFormField(
-                          enabled: false,
-                          controller: brandController,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'required';
-                            }
-                            return null;
-                          },
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(horizontal: 8),
-                            hintText: 'Choose Item Type',
-                            hintStyle: TextStyle(color: Colors.black),
-                            border: InputBorder.none,
-                          ),
+
+                          ],
                         ),
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Order For',
-                          style: TextStyle(fontSize: 13.sp),
-                        ),
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            smalBottomSheet(
-                                // fieldValue: 'Choose Area',
-                                list: orderFor(context),
-                                textController: orderForController);
-                          },
-                          child: Container(
-                            height: 6.h,
-                            width: 45.w,
-                            decoration: BoxDecoration(
-                              color: const Color(0xff27C1F9).withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: TextFormField(
-                              enabled: false,
-                              controller: orderForController,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'required';
-                                }
-                                return null;
+                    SizedBox(height: 1.h,),
+                     Text('Deliver Date & Time',style: TextStyle(
+                        color:  Color(0xff381568),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.sp),),
+                    SizedBox(height: 1.h,),
+                    Container(
+                      height: 6.2.h,
+                      width: 100.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey,width: 1),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                _pSelectDate(context);
                               },
-                              decoration: const InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 8),
-                                hintText: 'Order For',
-                                hintStyle: TextStyle(color: Colors.black),
-                                border: InputBorder.none,
+                              child: Container(
+                                height: 6.h,
+                                width: 42.w,
+                                alignment: Alignment.center,
+                                child: TextFormField(
+                                  style: const TextStyle(fontSize: 16),
+                                  textAlign: TextAlign.center,
+                                  enabled: false,
+                                  keyboardType: TextInputType.text,
+                                  controller: pickDateController,
+                                  onSaved: (val) {
+                                    _setDate = val;
+                                  },
+                                  decoration: const InputDecoration(
+
+
+                                      labelStyle:
+                                      TextStyle(color: Colors.black),
+                                      border:  InputBorder.none,
+                                      // disabledBorder:
+                                      // UnderlineInputBorder(borderSide: BorderSide.none),
+                                      // labelText: 'Time',
+                                      contentPadding:
+                                      EdgeInsets.only(top: 0.0)),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Please Enter Quantity ',
-                          style: TextStyle(fontSize: 13.sp),
-                        ),
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        Container(
-                          height: 6.h,
-                          width: 45.w,
-                          decoration: BoxDecoration(
-                            color: const Color(0xff27C1F9).withOpacity(0.15),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: TextFormField(
-                            controller: quantityController,
-                            keyboardType: TextInputType.number,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'required';
-                              }
-                              return null;
-                            },
-                            decoration: const InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 8),
-                              hintText: 'Items Quantity',
-                              hintStyle: TextStyle(color: Colors.black),
-                              border: InputBorder.none,
+                            SizedBox(width: 3.w,),
+
+                            Container(
+                              height: 6.h,
+                              width: 42.w,
+
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 0.4.h,),
+                                  InkWell(
+                                    onTap: () {
+                                      _pFSelectTime(context);
+                                    },
+                                    child: Container(
+                                      height: 2.7.h,
+                                      child: TextFormField(
+                                        style: const TextStyle(fontSize: 12),
+                                        // textAlign: TextAlign.center,
+                                        onSaved: (val) {
+                                          _setTime = val;
+                                        },
+                                        enabled: false,
+                                        keyboardType: TextInputType.text,
+                                        controller: pickFromTimeController,
+                                        decoration:  const InputDecoration(
+                                          prefixIcon: Text(' From:'),
+                                          contentPadding: EdgeInsets.only(top: -11),
+                                          border: InputBorder.none,
+                                          // labelText: 'Time',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      _pFSelectTime(context);
+                                    },
+                                    child: Container(
+                                      height: 2.7.h,
+                                      child: TextFormField(
+                                        style: const TextStyle(fontSize: 12),
+                                        // textAlign: TextAlign.center,
+                                        onSaved: (val) {
+                                          _setTime = val;
+                                        },
+                                        enabled: false,
+                                        keyboardType: TextInputType.text,
+                                        controller: pickFromTimeController,
+                                        decoration:  const InputDecoration(
+                                          prefixIcon: Text(' To:'),
+                                          contentPadding: EdgeInsets.only(top: -11),
+                                          // labelText: 'TO',
+                                          labelStyle:
+                                          TextStyle(color: Colors.black),
+                                          border:InputBorder.none,
+                                          // labelText: 'Time',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
+
+                          ],
                         ),
-                      ],
+                      ),
                     ),
+
+
                   ],
                 ),
                 SizedBox(
+                  height: 2.h,
+                ),
+                Text('Order Details'
+                    ,style: TextStyle(
+                    color:  Color(0xff381568),
+              fontWeight: FontWeight.w500,
+              fontSize: 16.sp),),
+                SizedBox(
                   height: 1.h,
                 ),
-                Text(
-                  'Add Photos',
-                  style:
-                      TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
+                Container(
+                  height: 20.h,
+                  width: 100.w,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff27C1F9).withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: Colors.grey)
+                  ),
+                  child: TextFormField(
+                    style: TextStyle(fontSize: 20),
+                    autofocus: false,
+                    keyboardType: TextInputType.text,
+                    maxLength: 200,
+                    minLines: 6,
+                    maxLines: 10,
+                    controller: descController,
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                      // hintText: 'description',
+                      hintStyle: TextStyle(color: Colors.black),
+                      border: InputBorder.none,
+                    ),
+                  ),
                 ),
-                Container(height: 18.h, child: AddImage()),
+
+                SizedBox(
+                  height: 2.h,
+                ),
+                Text(
+                  'Add Photos',style: TextStyle(
+                    color:  Color(0xff381568),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.sp),
+                ),
+                Container(height: 18.h,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: AddImage()),
                 SizedBox(
                   height: 1.h,
                 ),
                 const PickUpAddress(),
                 SizedBox(
-                  height: 1.h,
+                  height: 2.h,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('description',
-                      style: TextStyle(fontSize: 13.sp),
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    Container(
-                      height: 10.h,
-                      width: 100.w,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff27C1F9).withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: TextFormField(
-                        autofocus: false,
-                        keyboardType: TextInputType.text,
-                        maxLength: 200,
-                        minLines: 3,
-                        maxLines: 10,
-                        controller: descController,
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 8),
-                          hintText: 'description',
-                          hintStyle: TextStyle(color: Colors.black),
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+
               ],
             ),
           )),

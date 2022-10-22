@@ -147,7 +147,7 @@ class _AssignToRiderState extends State<AssignToRider> {
                                     ),
                                     child: Container(
                                       padding: const EdgeInsets.all(15),
-                                      height: 20.h,
+                                      height: 22.h,
                                       child: Column(
                                         // mainAxisSize: MainAxisSize.min,
                                         mainAxisAlignment:
@@ -176,53 +176,53 @@ class _AssignToRiderState extends State<AssignToRider> {
                                               ElevatedButton(
                                                 onPressed: () async{
                                                   orderData!.reference.update({
-                                                    'orderName': orderData['orderName'],
-                                                    'orderQuantity': orderData['orderQuantity'],
                                                     'orderUrl': orderData['orderUrl'],
-                                                    'pickTime':  orderData['pickTime'],
+                                                    'pickTimeFrom':  orderData['pickTimeFrom'],
+                                                    'pickTimeTo':  orderData['pickTimeTo'],
+                                                    'orderPostingDate':orderData['orderPostingDate'],
                                                     'pickupDate': orderData['pickupDate'],
-                                                    'deliverTime':  orderData['deliverTime'],
-                                                    'deliverDate':  orderData['deliverDate'],
-                                                    'orderFor':  orderData['orderFor'],
+                                                    'deliverTimeTo':orderData['deliverTimeTo'],
+                                                    'deliverTimeFrom': orderData['deliverTimeFrom'],
+                                                    'deliverDate': orderData['deliverDate'],
                                                     'orderStatus':widget.index==0? 'assignToRiderForPick':'assignToRiderForDeliver',
                                                     'orderPlacerId': orderData['orderPlacerId'],
                                                     'orderTime': orderData['orderTime'],
                                                     'price': orderData['price'],
                                                     'riderAssign':snapshot.data!.docs[index].id
                                                   });
-                                                  if(widget.index==0){
-                                                    services.orderStep3.doc().set({
-                                                      'orderName': orderData['orderName'],
-                                                      'orderQuantity': orderData['orderQuantity'],
-                                                      'orderUrl': orderData['orderUrl'],
-                                                      'pickTime':  orderData['pickTime'],
-                                                      'pickupDate': orderData['pickupDate'],
-                                                      'deliverTime':  orderData['deliverTime'],
-                                                      'deliverDate':  orderData['deliverDate'],
-                                                      'orderFor':  orderData['orderFor'],
-                                                      'orderStatus': 'assignToRiderForPick',
-                                                      'orderPlacerId': orderData['orderPlacerId'],
-                                                      'orderTime': orderData['orderTime'],
-                                                      'price': orderData['price'],
-                                                      'riderAssign':snapshot.data!.docs[index].id
-                                                    });
-                                                  }else{
-                                                    services.orderStep8.doc().set({
-                                                      'orderName': orderData['orderName'],
-                                                      'orderQuantity': orderData['orderQuantity'],
-                                                      'orderUrl': orderData['orderUrl'],
-                                                      'pickTime':  orderData['pickTime'],
-                                                      'pickupDate': orderData['pickupDate'],
-                                                      'deliverTime':  orderData['deliverTime'],
-                                                      'deliverDate':  orderData['deliverDate'],
-                                                      'orderFor':  orderData['orderFor'],
-                                                      'orderStatus': 'assignToRiderForDeliver',
-                                                      'orderPlacerId': orderData['orderPlacerId'],
-                                                      'orderTime': orderData['orderTime'],
-                                                      'price': orderData['price'],
-                                                      'riderAssign':snapshot.data!.docs[index].id
-                                                    });
-                                                  }
+                                                  // if(widget.index==0){
+                                                  //   services.orderStep3.doc().set({
+                                                  //     'orderName': orderData['orderName'],
+                                                  //     'orderQuantity': orderData['orderQuantity'],
+                                                  //     'orderUrl': orderData['orderUrl'],
+                                                  //     'pickTime':  orderData['pickTime'],
+                                                  //     'pickupDate': orderData['pickupDate'],
+                                                  //     'deliverTime':  orderData['deliverTime'],
+                                                  //     'deliverDate':  orderData['deliverDate'],
+                                                  //     'orderFor':  orderData['orderFor'],
+                                                  //     'orderStatus': 'assignToRiderForPick',
+                                                  //     'orderPlacerId': orderData['orderPlacerId'],
+                                                  //     'orderTime': orderData['orderTime'],
+                                                  //     'price': orderData['price'],
+                                                  //     'riderAssign':snapshot.data!.docs[index].id
+                                                  //   });
+                                                  // }else{
+                                                  //   services.orderStep8.doc().set({
+                                                  //     'orderName': orderData['orderName'],
+                                                  //     'orderQuantity': orderData['orderQuantity'],
+                                                  //     'orderUrl': orderData['orderUrl'],
+                                                  //     'pickTime':  orderData['pickTime'],
+                                                  //     'pickupDate': orderData['pickupDate'],
+                                                  //     'deliverTime':  orderData['deliverTime'],
+                                                  //     'deliverDate':  orderData['deliverDate'],
+                                                  //     'orderFor':  orderData['orderFor'],
+                                                  //     'orderStatus': 'assignToRiderForDeliver',
+                                                  //     'orderPlacerId': orderData['orderPlacerId'],
+                                                  //     'orderTime': orderData['orderTime'],
+                                                  //     'price': orderData['price'],
+                                                  //     'riderAssign':snapshot.data!.docs[index].id
+                                                  //   });
+                                                  // }
 
                                                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const AdminScreen()));
                                                 },

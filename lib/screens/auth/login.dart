@@ -16,7 +16,8 @@ import 'forget_passwod.dart';
 import 'google.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key,}) : super(key: key);
+  int? index;
+   LoginScreen({Key? key,required this.index}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -128,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Navigator.push(context, MaterialPageRoute(builder: (_)=>const SignUp()));
 
       },
-      child:RichText(
+      child:widget.index==0?RichText(
         text: const TextSpan(
           children: [
             TextSpan(
@@ -149,17 +150,17 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ],
         ),
-      )
+      ):Container()
     );
   }
 
   @override
   Widget build(BuildContext context) {
     var userProvider = Provider.of<UserProvider>(context);
-    var data = userProvider.userData;
+
     Widget _buildLoginBtn() {
       return FutureBuilder<QuerySnapshot>(
-          future: services.users.where('type',isEqualTo: 'user').get(),
+          future: services.users.get(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
               return const Text('Some things wrong');
@@ -179,25 +180,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: RaisedButton(
                       elevation: 5.0,
                       onPressed: () {
-                        if(formKey.currentState!.validate()){
-                          if(data['type']=='user'){
-                            services.userLogin(emailTextController.text, passwordTextController.text, context);
-                          }
-                          else{
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content:
-                              Text('This Account are not login as User !'),
-                              ),
-                            );
-                          }
-                        }
+
+                       widget.index==0? services.userLogin(emailTextController.text, passwordTextController.text, context):
+                       widget.index==1?services.adminLogin(emailTextController.text, passwordTextController.text, context):
+                         services.riderLogin(emailTextController.text, passwordTextController.text, context);
+
                       },
                       padding: const EdgeInsets.all(15.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       color: const Color(0xff27C1F9),
-                      child: const Text(
+                      child:  const Text(
                         'LOGIN',
                         style: TextStyle(
                           color: Colors.white,
@@ -281,7 +275,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 6.h,
                         ),
                         Text(
-                         "Let's Login",
+                         widget.index==0?"Let's Login":widget.index==1?"Admin Login":"Rider Login",
                           style: TextStyle(
                             color: Theme.of(context).backgroundColor,
                             fontFamily: 'OpenSans',
@@ -298,13 +292,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           height: 1.h,
                         ),
-                      forgetPassword(),
+                     widget.index==0? forgetPassword():Container(),
                         SizedBox(
                           height: 2.h,
                         ),
                         _buildLoginBtn(),
 
-                   SignInButton(
+                        widget.index==0? SignInButton(
                           Buttons.google,
                           text: "Sign up with Google",
                           onPressed: ()async {
@@ -314,7 +308,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                services.addUser(context, user.uid);
                             }
                           },
-                        ),
+                        ):Container(),
                         SizedBox(
                           height: 6.h,
                         ),

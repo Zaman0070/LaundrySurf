@@ -170,7 +170,7 @@ class _HomeState extends State<Home> {
                 }
                 return ListView.builder(
                     physics: const ScrollPhysics(),
-                  scrollDirection: Axis.vertical,
+                    scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: snapshot.data!.size,
                     itemBuilder: (context, index) {
@@ -178,114 +178,37 @@ class _HomeState extends State<Home> {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          height: 22.3.h,
+                          height: 20.9.h,
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(0.2.h),
+                            padding: EdgeInsets.all(0.5.h),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 13.0, left: 8),
-                                      child: Image.asset(
-                                        data['orderStatus'] == 'forUpdate'
-                                            ? 'assets/icons/clock.png'
-                                            : data['orderStatus'] == 'acceptThis'
-                                                ? 'assets/icons/hand.png'
-                                                : 'assets/icons/click.png',
-                                        height: 4.h,
-                                      ),
-                                    ),
                                     Row(
                                       children: [
-                                        SizedBox(
-                                          width: 2.w,
+                                        Image.asset(
+                                          data['orderStatus'] == 'Submit'
+                                              ? 'assets/icons/clock.png'
+                                              : data['orderStatus'] ==
+                                              'acceptThis'
+                                              ? 'assets/icons/hand.png'
+                                              : 'assets/icons/click.png',
+                                          height: 3.h,
+                                        ),SizedBox(width: 2.w,),
+                                        Text(
+                                          'Order # ${data['orderNumber']} ',
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w500),
                                         ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  'Order # ${data['orderNumber']} ',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                Text(
-                                                  '(${data['orderQuantity']} ${data['orderFor']})',
-                                                  style: TextStyle(
-                                                      fontWeight: FontWeight.w300,
-                                                      fontSize: 11.sp),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 0.5.h,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  data['pickTime'],
-                                                  style: TextStyle(
-                                                      color:
-                                                          const Color(0xff381568),
-                                                      fontWeight: FontWeight.w500,
-                                                      fontSize: 12.sp),
-                                                ),
-                                                SizedBox(
-                                                  width: 18.w,
-                                                ),
-                                                Text(
-                                                  data['deliverTime'],
-                                                  style: TextStyle(
-                                                      color:
-                                                          const Color(0xff381568),
-                                                      fontWeight: FontWeight.w500,
-                                                      fontSize: 12.sp),
-                                                )
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 20.w),
-                                              child: Image.asset(
-                                                'assets/icons/to.png',
-                                                height: 0.9.h,
-                                              ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  data['pickupDate'],
-                                                  style: TextStyle(
-                                                      color: Colors.grey[700],
-                                                      fontSize: 12.sp),
-                                                ),
-                                                SizedBox(
-                                                  width: 15.w,
-                                                ),
-                                                Text(
-                                                  data['deliverDate'],
-                                                  style: TextStyle(
-                                                      color: Colors.grey[700],
-                                                      fontSize: 12.sp),
-                                                )
-                                              ],
-                                            ),
-                                            // Text(data['orderStatus']=='forUpdate'?"Under Review":data['orderStatus']=='acceptThis'?"Order Accepted")
-                                          ],
-                                        ),
+
                                       ],
                                     ),
                                     Padding(
@@ -293,9 +216,10 @@ class _HomeState extends State<Home> {
                                       child: Text(
                                         data['orderStatus'] == 'forUpdate'
                                             ? ''
-                                            : data['orderStatus'] == 'acceptThis'
-                                                ? "\$${data['price']}"
-                                                : '\$${data['price']}',
+                                            : data['orderStatus'] ==
+                                                    'acceptThis'
+                                                ? "AED ${data['price']}"
+                                                : 'AED ${data['price']}',
                                         style: TextStyle(
                                             color: const Color(0xff27C1F9),
                                             fontSize: 15.sp),
@@ -303,12 +227,44 @@ class _HomeState extends State<Home> {
                                     )
                                   ],
                                 ),
-                                SizedBox(height: 0.5.h,),
+                                Column(
+                                  children: [
+                                    Row(
+
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 0.0, left: 8),
+                                          child: Text('Picked Date : ')
+                                        ),
+                                        Text(data['pickupDate']),
+
+                                      ],
+                                    ),
+                                    Row(
+
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 0.0, left: 8),
+                                          child: Text('Deliver date : '),
+                                        ),
+                                        Text(data['deliverDate']),
+                                      ],
+                                    ),
+
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 1.h,
+                                ),
                                 const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.0),
                                   child: Text(
                                     'Order Status',
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Column(
@@ -316,56 +272,186 @@ class _HomeState extends State<Home> {
                                     Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Image.asset(
                                             'assets/icons/address.png',
                                             height: 1.5.h,
                                           ),
-                                          SizedBox(width: 1.w,),
-                                          Image.asset(
-                                            'assets/icons/dot.png',color:data['orderStatus']=='acceptThis'? Colors.black:Colors.grey,
-                                            height: 0.17.h,
+                                          SizedBox(
+                                            width: 1.w,
                                           ),
-                                          SizedBox(width: 1.w,),
+                                          Image.asset(
+                                            'assets/icons/dot.png',
+                                            color: data['orderStatus'] ==
+                                                    'acceptThis'
+                                                ? Colors.black
+                                                : data['orderStatus'] ==
+                                                        'RiderPickOrder'
+                                                    ? Colors.black
+                                                    : data['orderStatus'] ==
+                                                            'AdminPickOrder'
+                                                        ? Colors.black
+                                                        : data['orderStatus'] ==
+                                                                'ReadyToDeliver'
+                                                            ? Colors.black
+                                                            : data['orderStatus'] ==
+                                                                    'ConfirmedDeliver'
+                                                                ? Colors.black
+                                                                : data['orderStatus'] ==
+                                                                        'Delivered'
+                                                                    ? Colors
+                                                                        .black
+                                                                    : Colors
+                                                                        .grey,
+                                            height: 0.11.h,
+                                          ),
+                                          SizedBox(
+                                            width: 1.w,
+                                          ),
                                           Image.asset(
                                             'assets/icons/pik.png',
                                             height: 1.5.h,
-                                            color: data['orderStatus']=='RiderPickOrder & DeliverToLaundryHub'?Colors.red:Colors.grey,
+                                            color: data['orderStatus'] ==
+                                                    'RiderPickOrder'
+                                                ? Colors.red
+                                                : data['orderStatus'] ==
+                                                        'AdminPickOrder'
+                                                    ? Colors.red
+                                                    : data['orderStatus'] ==
+                                                            'ReadyToDeliver'
+                                                        ? Colors.red
+                                                        : data['orderStatus'] ==
+                                                                'ConfirmedDeliver'
+                                                            ? Colors.red
+                                                            : data['orderStatus'] ==
+                                                                    'Delivered'
+                                                                ? Colors.red:
+                                            data['orderStatus'] ==
+                                                'assignToRiderForDeliver'
+                                                ? Colors.red
+                                                                : Colors.grey,
                                           ),
-                                          SizedBox(width: 1.w,),
+                                          SizedBox(
+                                            width: 1.w,
+                                          ),
                                           Image.asset(
                                             'assets/icons/dot.png',
-                                            height: 0.17.h,
-                                            color: data['orderStatus']=='RiderPickOrder & DeliverToLaundryHub'?Colors.black:Colors.grey,
+                                            height: 0.11.h,
+                                            color:  data['orderStatus'] ==
+                                                'AdminPickOrder'
+                                                ? Colors.black
+                                                : data['orderStatus'] ==
+                                                'ReadyToDeliver'
+                                                ? Colors.black
+                                                : data['orderStatus'] ==
+                                                'ConfirmedDeliver'
+                                                ? Colors.black
+                                                : data['orderStatus'] ==
+                                                'Delivered'
+                                                ? Colors.black:
+                                            data['orderStatus'] ==
+                                                'assignToRiderForDeliver'
+                                                ? Colors.black
+                                                : Colors.grey,
                                           ),
-                                          SizedBox(width: 1.w,),
+                                          SizedBox(
+                                            width: 1.w,
+                                          ),
                                           Image.asset(
                                             'assets/icons/clock.png',
                                             height: 1.5.h,
-                                            color: data['orderStatus']=='RiderPickOrder & DeliverToLaundryHub'?Colors.red:Colors.grey,
+                                            color:  data['orderStatus'] ==
+                                                'AdminPickOrder'
+                                                ? Colors.red
+                                                : data['orderStatus'] ==
+                                                'ReadyToDeliver'
+                                                ? Colors.red
+                                                : data['orderStatus'] ==
+                                                'ConfirmedDeliver'
+                                                ? Colors.red:
+                                            data['orderStatus'] ==
+                                                'assignToRiderForDeliver'
+                                                ? Colors.red
+                                                : data['orderStatus'] ==
+                                                'Delivered'
+                                                ? Colors.red
+                                                : Colors.grey,
                                           ),
-                                          SizedBox(width: 1.w,),
+                                          SizedBox(
+                                            width: 1.w,
+                                          ),
                                           Image.asset(
                                             'assets/icons/dot.png',
-                                            height: 0.17.h,
-                                            color: data['orderStatus']=='RiderPickOrder & DeliverToLaundryHub'?Colors.black:Colors.grey,
+                                            height: 0.11.h,
+                                            color: data['orderStatus'] ==
+                                                'ReadyToDeliver'
+                                                ? Colors.black
+                                                : data['orderStatus'] ==
+                                                'ConfirmedDeliver'
+                                                ? Colors.black
+                                                : data['orderStatus'] ==
+                                                'Delivered'
+                                                ? Colors.black:
+                                            data['orderStatus'] ==
+                                                'assignToRiderForDeliver'
+                                                ? Colors.black
+                                                : Colors.grey,
                                           ),
-                                          SizedBox(width: 1.w,),
+                                          SizedBox(
+                                            width: 1.w,
+                                          ),
+                                          Image.asset(
+                                            'assets/images/ready.png',
+                                            height: 1.5.h,
+                                            color: data['orderStatus'] ==
+                                                'ConfirmedDeliver'
+                                                ? Colors.red:
+                                            data['orderStatus'] ==
+                                                'assignToRiderForDeliver'
+                                                ? Colors.red
+                                                : data['orderStatus'] ==
+                                                'Delivered'
+                                                ? Colors.red
+                                                : Colors.grey,
+                                          ),
+                                          Image.asset(
+                                            'assets/icons/dot.png',
+                                            height: 0.11.h,
+                                            color: data['orderStatus'] ==
+                                                'ConfirmedDeliver'
+                                                ? Colors.black:
+                                            data['orderStatus'] ==
+                                                'assignToRiderForDeliver'
+                                                ? Colors.black
+                                                : data['orderStatus'] ==
+                                                'Delivered'
+                                                ? Colors.black
+                                                : Colors.grey,
+                                          ),
+                                          SizedBox(
+                                            width: 1.w,
+                                          ),
                                           Image.asset(
                                             'assets/icons/hand.png',
                                             height: 1.5.h,
-                                            color: data['orderStatus']=='Delivered'?const Color(0xff27C1F9):Colors.grey,
+                                            color: data['orderStatus'] ==
+                                                    'Delivered'
+                                                ? const Color(0xff27C1F9)
+                                                : Colors.grey,
                                           ),
                                         ],
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 4.0),
                                       child: Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             'Confirmed',
@@ -374,36 +460,64 @@ class _HomeState extends State<Home> {
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 8.sp),
                                           ),
-                                          SizedBox(width: 3.w,),
+                                          SizedBox(
+                                            width: 3.w,
+                                          ),
                                           Text(
                                             'Picked up',
                                             style: TextStyle(
-                                                color: data['orderStatus']=='RiderPickOrder & DeliverToLaundryHub'?const Color(0xff381568):Colors.grey,
+                                                color: data['orderStatus'] ==
+                                                        'RiderPickOrder & DeliverToLaundryHub'
+                                                    ? const Color(0xff381568)
+                                                    : Colors.grey,
                                                 // color: const Color(0xff381568),
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 8.sp),
                                           ),
                                           const Padding(
-                                            padding: EdgeInsets.only(right: 8.0),
+                                            padding:
+                                                EdgeInsets.only(right: 8.0),
                                             child: Divider(),
                                           ),
                                           Text(
                                             'In Progress',
                                             style: TextStyle(
-                                                color: data['orderStatus']=='RiderPickOrder & DeliverToLaundryHub'?const Color(0xff381568):Colors.grey,
+                                                color: data['orderStatus'] ==
+                                                        'RiderPickOrder & DeliverToLaundryHub'
+                                                    ? const Color(0xff381568)
+                                                    : Colors.grey,
                                                 //color: const Color(0xff381568),
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 8.sp),
                                           ),
-
                                           const Padding(
-                                            padding: EdgeInsets.only(right: 8.0),
+                                            padding:
+                                                EdgeInsets.only(right: 8.0),
+                                            child: Divider(),
+                                          ),
+                                          Text(
+                                            'Ready To deliver',
+                                            style: TextStyle(
+                                                color: data['orderStatus'] ==
+                                                        'RiderPickOrder & DeliverToLaundryHub'
+                                                    ? const Color(0xff381568)
+                                                    : Colors.grey,
+                                                //color: const Color(0xff381568),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 8.sp),
+                                          ),
+                                          const Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 8.0),
                                             child: Divider(),
                                           ),
                                           Text(
                                             'Delivered',
                                             style: TextStyle(
-                                                color: data['orderStatus']=='Delivered'?const Color(0xff381568):Colors.grey,
+                                                color: data['orderStatus'] ==
+                                                        'Delivered'
+                                                    ? const Color(0xff381568)
+                                                    : Colors.grey,
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 8.sp),
                                           ),
@@ -420,180 +534,6 @@ class _HomeState extends State<Home> {
                     });
               },
             ),
-            // SingleChildScrollView(
-            //   scrollDirection: Axis.vertical,
-            //   child: Column(
-            //     children: [
-            //       Container(
-            //         height: 10.5.h,
-            //        decoration: BoxDecoration(
-            //          color:  Colors.grey[200],
-            //          borderRadius: BorderRadius.circular(10),
-            //        ),
-            //         child: Padding(
-            //           padding:  EdgeInsets.all(0.2.h),
-            //           child: Row(
-            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //             crossAxisAlignment: CrossAxisAlignment.start,
-            //             children: [
-            //               Row(
-            //                 children: [
-            //                   Image.asset('assets/icons/clock.png',height: 4.h,),
-            //                   SizedBox(width: 3.w,),
-            //                   Column(
-            //                     crossAxisAlignment: CrossAxisAlignment.start,
-            //                     children:  [
-            //                       Row(
-            //                         children:  [
-            //                           const Text('Order # 123',style: TextStyle(fontWeight: FontWeight.w500),),
-            //                           Text(' (2 bags)',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 11.sp),),
-            //                         ],
-            //                       ),
-            //                       SizedBox(height: 0.5.h,),
-            //                       Row(
-            //                         children:  [
-            //                            Text('10:00',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 12.sp),),
-            //                           SizedBox(width: 18.w,),
-            //                             Text('20:00',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 12.sp),)
-            //                         ],
-            //                       ),
-            //                       Padding(
-            //                         padding:  EdgeInsets.only(left: 10.w),
-            //                         child: Image.asset('assets/icons/to.png',height: 0.9.h,),
-            //                       ),
-            //                       Row(
-            //                         children:  [
-            //                           Text('Thu, 1 Apr',style: TextStyle(color:  Colors.grey[700],fontSize: 12.sp),),
-            //                           SizedBox(width: 15.w,),
-            //                           Text('Thu, 1 Apr',style: TextStyle(color:  Colors.grey[700],fontSize: 12.sp),)
-            //                         ],
-            //                       ),
-            //
-            //
-            //                     ],
-            //                   ),
-            //                 ],
-            //               ),
-            //                Text("\$${'60.23'}",style: TextStyle(color:const Color(0xff27C1F9),fontSize: 15.sp),)
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //       SizedBox(height: 1.h,),
-            //       Container(
-            //         height: 10.5.h,
-            //         decoration: BoxDecoration(
-            //           color:  Colors.grey[200],
-            //           borderRadius: BorderRadius.circular(10),
-            //         ),
-            //         child: Padding(
-            //           padding:  EdgeInsets.all(0.2.h),
-            //           child: Row(
-            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //             crossAxisAlignment: CrossAxisAlignment.start,
-            //             children: [
-            //               Row(
-            //                 children: [
-            //                   Image.asset('assets/icons/hand.png',height: 4.h,),
-            //                   SizedBox(width: 3.w,),
-            //                   Column(
-            //                     crossAxisAlignment: CrossAxisAlignment.start,
-            //                     children:  [
-            //                       Row(
-            //                         children:  [
-            //                           const Text('Order # 123',style: TextStyle(fontWeight: FontWeight.w500),),
-            //                           Text(' (2 bags)',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 11.sp),),
-            //                         ],
-            //                       ),
-            //                       SizedBox(height: 0.5.h,),
-            //                       Row(
-            //                         children:  [
-            //                            Text('10:00',style: TextStyle(color:  const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 12.sp),),
-            //                           SizedBox(width: 18.w,),
-            //                             Text('20:00',style: TextStyle(color:const  Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 12.sp),)
-            //                         ],
-            //                       ),
-            //                       Padding(
-            //                         padding:  EdgeInsets.only(left: 10.w),
-            //                         child: Image.asset('assets/icons/to.png',height: 0.9.h,),
-            //                       ),
-            //                       Row(
-            //                         children:  [
-            //                           Text('Thu, 1 Apr',style: TextStyle(color:  Colors.grey[700],fontSize: 12.sp),),
-            //                           SizedBox(width: 15.w,),
-            //                           Text('Thu, 1 Apr',style: TextStyle(color:  Colors.grey[700],fontSize: 12.sp),)
-            //                         ],
-            //                       ),
-            //
-            //
-            //                     ],
-            //                   ),
-            //                 ],
-            //               ),
-            //               Text("\$${'60.23'}",style: TextStyle(color: const Color(0xff27C1F9),fontSize: 15.sp),)
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //       SizedBox(height: 1.h,),
-            //       Container(
-            //         height: 10.5.h,
-            //         decoration: BoxDecoration(
-            //           color:  Colors.grey[200],
-            //           borderRadius: BorderRadius.circular(10),
-            //         ),
-            //         child: Padding(
-            //           padding:  EdgeInsets.all(0.2.h),
-            //           child: Row(
-            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //             crossAxisAlignment: CrossAxisAlignment.start,
-            //             children: [
-            //               Row(
-            //                 children: [
-            //                   Image.asset('assets/icons/click.png',height: 4.h,),
-            //                   SizedBox(width: 3.w,),
-            //                   Column(
-            //                     crossAxisAlignment: CrossAxisAlignment.start,
-            //                     children:  [
-            //                       Row(
-            //                         children:  [
-            //                           const Text('Order # 123',style: TextStyle(fontWeight: FontWeight.w500),),
-            //                           Text(' (2 bags)',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 11.sp),),
-            //                         ],
-            //                       ),
-            //                       SizedBox(height: 0.5.h,),
-            //                       Row(
-            //                         children:  [
-            //                            Text('10:00',style: TextStyle(color:  const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 12.sp),),
-            //                           SizedBox(width: 18.w,),
-            //                             Text('20:00',style: TextStyle(color:const  Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 12.sp),)
-            //                         ],
-            //                       ),
-            //                       Padding(
-            //                         padding:  EdgeInsets.only(left: 10.w),
-            //                         child: Image.asset('assets/icons/to.png',height: 0.9.h,),
-            //                       ),
-            //                       Row(
-            //                         children:  [
-            //                           Text('Thu, 1 Apr',style: TextStyle(color:  Colors.grey[700],fontSize: 12.sp),),
-            //                           SizedBox(width: 15.w,),
-            //                           Text('Thu, 1 Apr',style: TextStyle(color:  Colors.grey[700],fontSize: 12.sp),)
-            //                         ],
-            //                       ),
-            //
-            //
-            //                     ],
-            //                   ),
-            //                 ],
-            //               ),
-            //               Text("\$${'60.23'}",style: TextStyle(color: Color(0xff27C1F9),fontSize: 15.sp),)
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),

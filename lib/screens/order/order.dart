@@ -170,30 +170,19 @@ class _OrderScreenState extends State<OrderScreen> {
                                   Row(
                                     children: [
                                       Text('Order #${data['orderNumber']}',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.bold,fontSize: 14.sp),),
-                                      Text(' (${data['orderQuantity']} ${data['orderName']})',style: TextStyle(color: Colors.grey.shade600,fontSize: 10.sp),),
+
                                     ],
                                   ),
                                   SizedBox(height: 1.h,),
                                   Text('${data['pickupDate']}-  To  -${data['deliverDate']}',style: TextStyle(color: Colors.grey.shade600,fontSize: 10.sp),),
-                                  const Divider(),
-                                  Text(data['orderFor'],style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.bold,fontSize: 13.sp),),
-                                  SizedBox(height: 0.7.h,),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      RichText(text:  TextSpan(text: '${data['orderQuantity']} x ${data['orderName']}  ',style: TextStyle(color: Colors.grey.shade900,fontSize: 11.sp),
-                                      ),
-                                      ),
-                                      Text('\$${data['price']}',style: TextStyle(color:Colors.red.shade800,fontWeight: FontWeight.bold,fontSize: 12.sp),),
-                                    ],
-                                  ),
+
                                   SizedBox(height: 0.7.h,),
                                   const Divider(),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text('Subtotal',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w400,fontSize: 12.sp),),
-                                      Text('\$${data['price']}',style: TextStyle(color:Colors.red.shade800,fontWeight: FontWeight.bold,fontSize: 12.sp),),
+                                      Text('AED ${data['price']}',style: TextStyle(color:Colors.red.shade800,fontWeight: FontWeight.bold,fontSize: 12.sp),),
                                     ],
                                   ),
                                   SizedBox(height: 1.h,),
@@ -209,7 +198,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text('Total',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w400,fontSize: 12.sp),),
-                                      Text('\$${data['price']}',style: TextStyle(color:Colors.red.shade800,fontWeight: FontWeight.bold,fontSize: 14.sp),),
+                                      Text('AED ${data['price']}',style: TextStyle(color:Colors.red.shade800,fontWeight: FontWeight.bold,fontSize: 14.sp),),
                                     ],
                                   ),
                                 ],
@@ -218,7 +207,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           ),
                           SizedBox(height: 1.h,),
                           Container(
-                            height: 8.h,
+                            height: 9.h,
                             width: 100.w,
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey.shade300),

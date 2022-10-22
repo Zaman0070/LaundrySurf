@@ -88,33 +88,33 @@ class _OrderDetailsState extends State<OrderDetails> {
         child: InkWell(
           onTap: () async {
             data!.reference.update({
-              'orderName': data['orderName'],
-              'orderQuantity': data['orderQuantity'],
               'orderUrl': data['orderUrl'],
-              'pickTime':  data['pickTime'],
+              'pickTimeFrom':  data['pickTimeFrom'],
+              'pickTimeTo':  data['pickTimeTo'],
+              'orderPostingDate':data['orderPostingDate'],
               'pickupDate': data['pickupDate'],
-              'deliverTime': TimeController.text,
+              'deliverTimeTo':data['deliverTimeTo'],
+              'deliverTimeFrom': TimeController.text,
               'deliverDate': DateController.text,
-              'orderFor':  data['orderFor'],
               'orderStatus': 'acceptThis',
               'orderPlacerId': data['orderPlacerId'],
               'orderTime': data['orderTime'],
               'price': priceController.text,
             });
-         services.orderStep2.doc().set({
-           'orderName': data['orderName'],
-           'orderQuantity': data['orderQuantity'],
-           'orderUrl': data['orderUrl'],
-           'pickTime':  data['pickTime'],
-           'pickupDate': data['pickupDate'],
-           'deliverTime': TimeController.text,
-           'deliverDate': DateController.text,
-           'orderFor':  data['orderFor'],
-           'orderStatus': 'acceptThis',
-           'orderPlacerId': data['orderPlacerId'],
-           'orderTime': data['orderTime'],
-           'price': priceController.text,
-         });
+         // services.orderStep2.doc().set({
+         //   'orderName': data['orderName'],
+         //   'orderQuantity': data['orderQuantity'],
+         //   'orderUrl': data['orderUrl'],
+         //   'pickTime':  data['pickTime'],
+         //   'pickupDate': data['pickupDate'],
+         //   'deliverTime': TimeController.text,
+         //   'deliverDate': DateController.text,
+         //   'orderFor':  data['orderFor'],
+         //   'orderStatus': 'acceptThis',
+         //   'orderPlacerId': data['orderPlacerId'],
+         //   'orderTime': data['orderTime'],
+         //   'price': priceController.text,
+         // });
 
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
@@ -257,18 +257,18 @@ class _OrderDetailsState extends State<OrderDetails> {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          data['orderName'],
-                          style: TextStyle(
-                              color: const Color(0xff381568),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14.sp),
-                        ),
-                        Text(
-                          "(${data['orderQuantity']}) items for ${data['orderFor']}",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 11.sp),
-                        ),
+                        // Text(
+                        //   data['orderName'],
+                        //   style: TextStyle(
+                        //       color: const Color(0xff381568),
+                        //       fontWeight: FontWeight.bold,
+                        //       fontSize: 14.sp),
+                        // ),
+                        // Text(
+                        //   "(${data['orderQuantity']}) items for ${data['orderFor']}",
+                        //   style: TextStyle(
+                        //       fontWeight: FontWeight.w400, fontSize: 11.sp),
+                        // ),
                       ],
                     ),
                     const Divider(),
@@ -278,13 +278,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        RichText(
-                          text: TextSpan(
-                              text:"(${data['orderQuantity']}) items for ${data['orderFor']}",
-                              style: TextStyle(
-                                  color: Colors.grey.shade900, fontSize: 11.sp),
-                             ),
-                        ),
+                        // RichText(
+                        //   text: TextSpan(
+                        //       text:"(${data['orderQuantity']}) items for ${data['orderFor']}",
+                        //       style: TextStyle(
+                        //           color: Colors.grey.shade900, fontSize: 11.sp),
+                        //      ),
+                        // ),
                         Container(
                           height: 6.h,
                           width: 45.w,

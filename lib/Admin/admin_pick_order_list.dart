@@ -62,53 +62,57 @@ class _AdminPickOrderListState extends State<AdminPickOrderList> {
                     orderProvider.getOrderDetails(data);
                     Navigator.push(context, MaterialPageRoute(builder: (_)=>  AdminPickOrderDetails(index: widget.index,)));
                   },
-                  child: Padding(
+                  child:Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      height: 10.5.h,
+                      height: 16.h,
                       decoration: BoxDecoration(
                         color:  Colors.grey[200],
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Padding(
                         padding:  EdgeInsets.all(0.2.h),
-                        child:Row(
+                        child:Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Image.asset('assets/icons/clock.png',height: 4.h,),
-                            SizedBox(width: 3.w,),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children:  [
-                                SizedBox(height: 1.h,),
-                                Row(
+                            Row(
+                              children: [
+                                Image.asset(widget.index==0?'assets/icons/clock.png':widget.index==1?'assets/icons/hand.png':'assets/icons/click.png',height: 4.h,),
+                                SizedBox(width: 3.w,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children:  [
-                                    Text("Order ${data['orderNumber'] } # ",style:  TextStyle(fontWeight: FontWeight.w600,fontSize: 14.sp),),
-                                    Text(data['orderName'],style:  TextStyle(fontWeight: FontWeight.w600,fontSize: 14.sp),),
-                                    SizedBox(width: 1.w,),
-                                    Text("(${data['orderQuantity']}) items for ${data['orderFor']}",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11.sp),),
-                                  ],
-                                ),
-                                SizedBox(height: 0.5.h,),
-                                Row(
-                                  children:  [
-                                    Text(data['pickTime'],style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 12.sp),),
-                                    SizedBox(width: 18.w,),
-                                    Text(data['deliverTime'],style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 12.sp),)
-                                  ],
-                                ),
-                                Padding(
-                                  padding:  EdgeInsets.only(left: 18.w),
-                                  child: Image.asset('assets/icons/to.png',height: 0.9.h,),
-                                ),
-                                Row(
-                                  children:  [
-                                    Text(data['pickupDate'],style: TextStyle(color:  Colors.grey[700],fontSize: 12.sp),),
-                                    SizedBox(width: 15.w,),
-                                    Text(data['deliverDate'],style: TextStyle(color:  Colors.grey[700],fontSize: 12.sp),)
+                                    SizedBox(height: 1.h,),
+                                    Row(
+                                      children:  [
+                                        Text("Order # ${data['orderNumber'] } ",style:  TextStyle(fontWeight: FontWeight.w600,fontSize: 14.sp),),
+                                      ],
+                                    ),
+                                    SizedBox(height: 0.5.h,),
+                                    Row(
+                                      children:  [
+                                        Text(data['pickTimeFrom'],style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 12.sp),),
+                                        SizedBox(width: 18.w,),
+                                        Text(data['deliverTimeFrom'],style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w500,fontSize: 12.sp),)
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding:  EdgeInsets.only(left: 18.w),
+                                      child: Image.asset('assets/icons/to.png',height: 0.9.h,),
+                                    ),
+                                    Row(
+                                      children:  [
+                                        Text(data['pickupDate'],style: TextStyle(color:  Colors.grey[700],fontSize: 12.sp),),
+                                        SizedBox(width: 15.w,),
+                                        Text(data['deliverDate'],style: TextStyle(color:  Colors.grey[700],fontSize: 12.sp),)
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ],
                             ),
+                            SizedBox(height: 1.h,),
+                            Text('      ${data['description']}',maxLines: 2,overflow: TextOverflow.ellipsis,)
                           ],
                         ),
                       ),

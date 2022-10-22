@@ -128,7 +128,7 @@ class _RiderLoginScreenState extends State<RiderLoginScreen> {
     var data = userProvider.userData;
     Widget _buildLoginBtn() {
       return FutureBuilder<QuerySnapshot>(
-          future: services.users.where('type',isEqualTo: 'rider').get(),
+          future: services.users.get(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
               return const Text('Some things wrong');

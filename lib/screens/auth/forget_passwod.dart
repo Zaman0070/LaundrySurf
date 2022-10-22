@@ -29,7 +29,7 @@ class ForgetPassword extends StatelessWidget {
               if(formKey.currentState!.validate()){
                 FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text)
                     .then((value) {
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=> LoginScreen(index: 0,)));
                 });
 
               }

@@ -38,7 +38,7 @@ class _OptionScreenState extends State<OptionScreen> {
             setState(() {
               index= 0;
             });
-            Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (_)=> LoginScreen(index: 0,)));
           },
           child: Container(
             height: 10.h,
@@ -70,7 +70,7 @@ class _OptionScreenState extends State<OptionScreen> {
               index = 1;
             });
 
-            Navigator.push(context, MaterialPageRoute(builder: (_)=>const AdminLoginScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (_)=> LoginScreen(index: 1,)));
           },
           child: Container(
             height: 10.h,
@@ -101,7 +101,7 @@ class _OptionScreenState extends State<OptionScreen> {
             setState(() {
               index =  2;
             });
-            Navigator.push(context, MaterialPageRoute(builder: (_)=>const RiderLoginScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (_)=> LoginScreen(index: 2,)));
           },
           child: Container(
             height: 10.h,

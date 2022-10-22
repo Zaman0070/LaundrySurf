@@ -54,7 +54,7 @@ class _UserNavigationPageState extends State<UserNavigationPage> {
               if (data['type']=='rider'){
                 return const RiderScreen();
               }
-              return  data['type']=='user'? const LoginScreen():data['type']=='admin'? const AdminLoginScreen():const RiderLoginScreen();
+              return  data['type']=='user'?  LoginScreen(index: 0,):data['type']=='admin'? LoginScreen(index: 1,):LoginScreen(index: 2,);
 
             },
             // Navigator.of(context).pop();

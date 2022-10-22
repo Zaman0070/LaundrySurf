@@ -317,7 +317,7 @@ class _AdminScreenState extends State<AdminScreen> {
               },
             ),
             SizedBox(height: 2.h,),
-            ///  4  Rider confirmed       ////////////////////////////
+            ///  4 edit Rider confirmed       ////////////////////////////
             FutureBuilder<QuerySnapshot>(
               future: services.order
                   .where('orderStatus',isEqualTo: 'ConfirmedForPick').get(),
@@ -645,7 +645,7 @@ class _AdminScreenState extends State<AdminScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Image.asset('assets/images/delived.png',height: 5.h,),
+                              Image.asset('assets/icons/click.png',height: 5.h,),
                               SizedBox(width: 2.w,),
                               Text('Delivered', style: GoogleFonts.poppins(
                                 textStyle: TextStyle(

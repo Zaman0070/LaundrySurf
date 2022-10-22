@@ -86,7 +86,7 @@ class FirebaseServices{
           Text('Successfully login !'),
           ),
         );
-        Navigator.push(context, MaterialPageRoute(builder: (_)=>const MainScreen()));
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>const MainScreen()), (route) => false);
 
       }
 
@@ -118,8 +118,7 @@ class FirebaseServices{
           Text('Successfully login !'),
           ),
         );
-        Navigator.push(context, MaterialPageRoute(builder: (_)=>const AdminScreen()));
-
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>const AdminScreen()), (route) => false);
       }
 
     }on FirebaseAuthException catch(e){
@@ -270,7 +269,7 @@ class FirebaseServices{
           Text('Successfully login !'),
           ),
         );
-        Navigator.push(context, MaterialPageRoute(builder: (_)=>const RiderScreen()));
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>const RiderScreen()), (route) => false);
 
       }
 

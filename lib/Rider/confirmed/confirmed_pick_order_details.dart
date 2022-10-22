@@ -119,21 +119,17 @@ class _ConfirmPickOrderDetailsState extends State<ConfirmPickOrderDetails> {
                     Row(
                       children: [
                         Text('Order #${data!['orderNumber']}',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.bold,fontSize: 14.sp),),
-                        Text(' (${data['orderQuantity']} ${data['orderName']})',style: TextStyle(color: Colors.grey.shade600,fontSize: 10.sp),),
                       ],
                     ),
                     SizedBox(height: 1.h,),
                     Text('${data['pickupDate']}-  To  -${data['deliverDate']}',style: TextStyle(color: Colors.grey.shade600,fontSize: 10.sp),),
                     const Divider(),
-                    Text(data['orderFor'],style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.bold,fontSize: 13.sp),),
                     SizedBox(height: 0.7.h,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        RichText(text:  TextSpan(text: '${data['orderQuantity']} x ${data['orderName']}  ',style: TextStyle(color: Colors.grey.shade900,fontSize: 11.sp),
-                        ),
-                        ),
-                        Text('\$${data['price']}',style: TextStyle(color:Colors.red.shade800,fontWeight: FontWeight.bold,fontSize: 12.sp),),
+                        Text('price'),
+                        Text('AED ${data['price']}',style: TextStyle(color:Colors.red.shade800,fontWeight: FontWeight.bold,fontSize: 12.sp),),
                       ],
                     ),
                     SizedBox(height: 0.7.h,),
@@ -142,7 +138,7 @@ class _ConfirmPickOrderDetailsState extends State<ConfirmPickOrderDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Subtotal',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w400,fontSize: 12.sp),),
-                        Text('\$${data['price']}',style: TextStyle(color:Colors.red.shade800,fontWeight: FontWeight.bold,fontSize: 12.sp),),
+                        Text('AED ${data['price']}',style: TextStyle(color:Colors.red.shade800,fontWeight: FontWeight.bold,fontSize: 12.sp),),
                       ],
                     ),
                     SizedBox(height: 1.h,),
@@ -158,7 +154,7 @@ class _ConfirmPickOrderDetailsState extends State<ConfirmPickOrderDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Total',style: TextStyle(color: const Color(0xff381568),fontWeight: FontWeight.w400,fontSize: 12.sp),),
-                        Text('\$${data['price']}',style: TextStyle(color:Colors.red.shade800,fontWeight: FontWeight.bold,fontSize: 14.sp),),
+                        Text('AED ${data['price']}',style: TextStyle(color:Colors.red.shade800,fontWeight: FontWeight.bold,fontSize: 14.sp),),
                       ],
                     ),
                   ],
@@ -259,54 +255,53 @@ class _ConfirmPickOrderDetailsState extends State<ConfirmPickOrderDetails> {
             InkWell(
               onTap: () async {
                 data.reference.update({
-                  'orderName': data['orderName'],
-                  'orderQuantity': data['orderQuantity'],
                   'orderUrl': data['orderUrl'],
-                  'pickTime':  data['pickTime'],
+                  'pickTimeFrom':  data['pickTimeFrom'],
+                  'pickTimeTo':  data['pickTimeTo'],
+                  'orderPostingDate':data['orderPostingDate'],
                   'pickupDate': data['pickupDate'],
-                  'deliverTime': TimeController.text,
+                  'deliverTimeTo':data['deliverTimeTo'],
+                  'deliverTimeFrom': TimeController.text,
                   'deliverDate':  DateController.text,
-                  'orderFor':  data['orderFor'],
                   'orderStatus':widget.index ==0?"ConfirmedForPick":"ConfirmedDeliver",
-                 // 'orderStatus': widget.index==0?'RiderPickOrder & DeliverToLaundryHub':"Delivered",
                   'orderPlacerId': data['orderPlacerId'],
                   'orderTime': data['orderTime'],
                   'price': data['price'],
                   'riderAssign':data['riderAssign']
                 });
-                if(widget.index==0){
-                  services.orderStep4.doc().set({
-                    'orderName': data['orderName'],
-                    'orderQuantity': data['orderQuantity'],
-                    'orderUrl': data['orderUrl'],
-                    'pickTime':  data['pickTime'],
-                    'pickupDate': data['pickupDate'],
-                    'deliverTime':  data['deliverTime'],
-                    'deliverDate':  data['deliverDate'],
-                    'orderFor':  data['orderFor'],
-                    'orderStatus': 'ConfirmedForPick',
-                    'orderPlacerId': data['orderPlacerId'],
-                    'orderTime': data['orderTime'],
-                    'price': data['price'],
-                    'riderAssign':data['riderAssign']
-                  });
-                }else{
-                  services.orderStep9.doc().set({
-                    'orderName': data['orderName'],
-                    'orderQuantity': data['orderQuantity'],
-                    'orderUrl': data['orderUrl'],
-                    'pickTime':  data['pickTime'],
-                    'pickupDate': data['pickupDate'],
-                    'deliverTime':  data['deliverTime'],
-                    'deliverDate':  data['deliverDate'],
-                    'orderFor':  data['orderFor'],
-                    'orderStatus': 'ConfirmedDeliver',
-                    'orderPlacerId': data['orderPlacerId'],
-                    'orderTime': data['orderTime'],
-                    'price': data['price'],
-                    'riderAssign':data['riderAssign']
-                  });
-                }
+                // if(widget.index==0){
+                //   services.orderStep4.doc().set({
+                //     'orderName': data['orderName'],
+                //     'orderQuantity': data['orderQuantity'],
+                //     'orderUrl': data['orderUrl'],
+                //     'pickTime':  data['pickTime'],
+                //     'pickupDate': data['pickupDate'],
+                //     'deliverTime':  data['deliverTime'],
+                //     'deliverDate':  data['deliverDate'],
+                //     'orderFor':  data['orderFor'],
+                //     'orderStatus': 'ConfirmedForPick',
+                //     'orderPlacerId': data['orderPlacerId'],
+                //     'orderTime': data['orderTime'],
+                //     'price': data['price'],
+                //     'riderAssign':data['riderAssign']
+                //   });
+                // }else{
+                //   services.orderStep9.doc().set({
+                //     'orderName': data['orderName'],
+                //     'orderQuantity': data['orderQuantity'],
+                //     'orderUrl': data['orderUrl'],
+                //     'pickTime':  data['pickTime'],
+                //     'pickupDate': data['pickupDate'],
+                //     'deliverTime':  data['deliverTime'],
+                //     'deliverDate':  data['deliverDate'],
+                //     'orderFor':  data['orderFor'],
+                //     'orderStatus': 'ConfirmedDeliver',
+                //     'orderPlacerId': data['orderPlacerId'],
+                //     'orderTime': data['orderTime'],
+                //     'price': data['price'],
+                //     'riderAssign':data['riderAssign']
+                //   });
+                // }
 
 
                 ScaffoldMessenger.of(context).showSnackBar(
